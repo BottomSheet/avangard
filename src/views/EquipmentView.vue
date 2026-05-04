@@ -3,6 +3,7 @@ import PageHero from '@/components/sections/PageHero.vue'
 import WhyUsSection from '@/components/sections/WhyUsSection.vue'
 import CatalogSection from '@/components/sections/CatalogSection.vue'
 import WorkTypesSection from '@/components/sections/WorkTypesSection.vue'
+import ProcessSection from '@/components/sections/ProcessSection.vue' 
 import ContactSection from '@/components/sections/ContactSection.vue'
 import AppHr from '@/components/ui/AppHr.vue'
 
@@ -11,6 +12,7 @@ import {
   whyUs,
   catalog,
   workTypes,
+  process,      
   contact
 } from '@/data/equipment'
 </script>
@@ -22,6 +24,8 @@ import {
   <CatalogSection :data="catalog" />
   <AppHr />
   <WorkTypesSection :data="workTypes" />
+  <AppHr />
+  <ProcessSection :data="process" />   
   <AppHr />
   <ContactSection :data="contact" />
 </template>

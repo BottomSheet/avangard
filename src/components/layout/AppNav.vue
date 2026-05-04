@@ -1,5 +1,5 @@
 <script setup>
-import { ref, nextTick } from 'vue'
+import { ref, nextTick, watch, onBeforeUnmount } from 'vue'
 import { RouterLink, useRoute, useRouter } from 'vue-router'
 import { company, navLinks } from '@/data/site'
 import { useScrolled } from '@/composables/useScrolled'
@@ -14,6 +14,22 @@ function toggleMenu() {
 function closeMenu() {
   menuOpen.value = false
 }
+
+// Блокируем скролл фона, когда мобильное меню открыто.
+// Делаем это только в мобильном размере, чтобы на десктопе ничего не трогать.
+watch(menuOpen, (open) => {
+  if (typeof document === 'undefined') return
+  const isMobileViewport = window.matchMedia('(max-width: 768px)').matches
+  if (open && isMobileViewport) {
+    document.body.style.overflow = 'hidden'
+  } else {
+    document.body.style.overflow = ''
+  }
+})
+
+onBeforeUnmount(() => {
+  if (typeof document !== 'undefined') document.body.style.overflow = ''
+})
 
 const router = useRouter()
 
@@ -49,7 +65,7 @@ async function goToContact() {
 
       <a href="#contact" class="btn nav-cta" @click.prevent="goToContact">Оставить заявку</a>
 
-      <div class="burger" @click="toggleMenu">
+      <div class="burger" :class="{ open: menuOpen }" @click="toggleMenu">
         <span></span><span></span><span></span>
       </div>
     </div>

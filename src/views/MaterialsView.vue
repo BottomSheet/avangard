@@ -14,7 +14,6 @@ import {
   catalog,
   process,
   delivery,
-  deliveryMap,
   gallery,
   contact
 } from '@/data/materials'
@@ -28,7 +27,7 @@ import {
   <AppHr />
   <ProcessSection :data="process" />
   <AppHr />
-  <DeliverySection :data="delivery" :map="deliveryMap" />
+  <DeliverySection :data="delivery" />
   <AppHr />
   <GallerySection :data="gallery" />
   <AppHr />

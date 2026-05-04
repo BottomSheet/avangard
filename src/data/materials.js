@@ -155,23 +155,6 @@ export const gallery = {
     { label: 'фото / карьер №2' },
     { label: 'фото / карьер №3' }
   ],
-}
-
-export const contact = {
-  label: 'Контакты',
-  title: 'Рассчитаем стоимость и организуем доставку',
-  formId: 'formMat',
-  formTitle: 'Заказать материалы',
-  formSubtitle: 'Укажите имя и телефон — перезвоним и уточним детали',
-  showAddress: false,
-  scheduleField: 'default'
-}
-
-
-export const deliveryMap = {
-  label: 'География доставки',
-  title: 'Где мы работаем',
-  description: 'Доставляем материалы по Владимиру и области. Основные точки выдачи и склады.',
   center: [56.129057, 40.406635],
   zoom: 11,
   points: [
@@ -194,4 +177,14 @@ export const deliveryMap = {
       description: 'Грунт, торф, насыпные материалы'
     }
   ]
+}
+
+export const contact = {
+  label: 'Контакты',
+  title: 'Рассчитаем стоимость и организуем доставку',
+  formId: 'formMat',
+  formTitle: 'Заказать материалы',
+  formSubtitle: 'Укажите имя и телефон — перезвоним и уточним детали',
+  showAddress: false,
+  scheduleField: 'default'
 }

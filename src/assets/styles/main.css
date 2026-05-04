@@ -5,6 +5,14 @@
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+body { width: 100%; }
+img, video, iframe { max-width: 100%; }
+
 :root {
   --bg: #FAFAF8;
   --fg: #141412;
@@ -368,6 +376,7 @@ p { font-size: 16px; line-height: 1.7; color: var(--mid); font-weight: 400; }
 .catalog-card {
   border: 1px solid var(--border); border-radius: var(--radius);
   overflow: hidden; transition: box-shadow 0.2s;
+  display: flex; flex-direction: column;
 }
 
 .catalog-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.08); }
@@ -396,11 +405,16 @@ p { font-size: 16px; line-height: 1.7; color: var(--mid); font-weight: 400; }
   opacity: 0.4;
 }
 
-.catalog-body { padding: 24px; }
+.catalog-body {
+  padding: 24px;
+  display: flex; flex-direction: column;
+  flex: 1;
+}
 .catalog-body h3 { font-size: 17px; font-weight: 400; margin-bottom: 8px; }
 .catalog-body p { font-size: 14px; margin-bottom: 16px; }
 .catalog-price { font-size: 15px; font-weight: 400; margin-bottom: 16px; }
 .catalog-price span { color: var(--mid); font-weight: 300; font-size: 13px; }
+.catalog-body .btn { margin-top: auto; align-self: flex-start; }
 
 /* ─── PROCESS ─────────────────────────────────────── */
 .process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
@@ -618,8 +632,22 @@ footer.app-footer {
 hr.app-hr { border: none; border-top: 1px solid var(--border); }
 
 /* ─── MOBILE BURGER ───────────────────────────────── */
-.burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
-.burger span { width: 22px; height: 1px; background: var(--fg); display: block; transition: all 0.3s; }
+.burger {
+  display: none; flex-direction: column; justify-content: center;
+  gap: 5px; cursor: pointer; padding: 4px;
+  width: 30px; height: 30px;
+  position: relative;
+}
+.burger span {
+  width: 22px; height: 1px; background: var(--fg); display: block;
+  transition: transform 0.35s cubic-bezier(0.65, 0, 0.35, 1),
+              opacity 0.2s ease,
+              background 0.3s;
+  transform-origin: center;
+}
+.burger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.burger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.burger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 
 @media (max-width: 768px) {
   .wrap { padding: 0 24px; }
