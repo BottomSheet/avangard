@@ -155,14 +155,6 @@ export const gallery = {
     { label: 'фото / карьер №2' },
     { label: 'фото / карьер №3' }
   ],
-  map: {
-    title: 'карта расположения карьеров',
-    pins: [
-      { label: 'Карьер №1' },
-      { label: 'Карьер №2' },
-      { label: 'Карьер №3' }
-    ]
-  }
 }
 
 export const contact = {
@@ -173,4 +165,33 @@ export const contact = {
   formSubtitle: 'Укажите имя и телефон — перезвоним и уточним детали',
   showAddress: false,
   scheduleField: 'default'
+}
+
+
+export const deliveryMap = {
+  label: 'География доставки',
+  title: 'Где мы работаем',
+  description: 'Доставляем материалы по Владимиру и области. Основные точки выдачи и склады.',
+  center: [56.129057, 40.406635],
+  zoom: 11,
+  points: [
+    {
+      coords: [56.067588, 40.417246],
+      title: 'Главный офис',
+      address: 'г. Владимир, центр',
+      description: 'Приём заявок, выдача документов'
+    },
+    {
+      coords: [56.075037, 40.274969],
+      title: 'Склад №1',
+      address: 'г. Владимир, западный район',
+      description: 'Песок, щебень, ПГС'
+    },
+    {
+      coords: [56.218916, 40.767719],
+      title: 'Склад №2',
+      address: 'Суздальский район',
+      description: 'Грунт, торф, насыпные материалы'
+    }
+  ]
 }

@@ -1,6 +1,6 @@
 <script setup>
-import { ref } from 'vue'
-import { RouterLink } from 'vue-router'
+import { ref, nextTick } from 'vue'
+import { RouterLink, useRoute, useRouter } from 'vue-router'
 import { company, navLinks } from '@/data/site'
 import { useScrolled } from '@/composables/useScrolled'
 
@@ -14,6 +14,24 @@ function toggleMenu() {
 function closeMenu() {
   menuOpen.value = false
 }
+
+const router = useRouter()
+
+async function goToContact() {
+  closeMenu()
+  const el = document.getElementById('contact')
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    return
+  }
+  // секции нет на этой странице — идём на главную, ждём рендер, скроллим
+  await router.push('/')
+  await nextTick()
+  setTimeout(() => {
+    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }, 100)
+}
+
 </script>
 
 <template>
@@ -29,7 +47,7 @@ function closeMenu() {
         </li>
       </ul>
 
-      <a href="#contact" class="btn nav-cta">Оставить заявку</a>
+      <a href="#contact" class="btn nav-cta" @click.prevent="goToContact">Оставить заявку</a>
 
       <div class="burger" @click="toggleMenu">
         <span></span><span></span><span></span>
