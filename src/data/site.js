@@ -20,7 +20,6 @@ export const contacts = {
 }
 
 export const navLinks = [
-  { to: '/', label: 'Главная' },
   { to: '/materials', label: 'Материалы' },
   { to: '/equipment', label: 'Спецтехника' },
   { to: '/services', label: 'Услуги' }
