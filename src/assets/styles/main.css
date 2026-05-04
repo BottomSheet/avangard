@@ -631,18 +631,21 @@ hr.app-hr { border: none; border-top: 1px solid var(--border); }
     display: none; flex-direction: column;
     position: fixed; top: var(--nav-h); left: 0; right: 0;
     background: var(--bg);
-    padding: 16px 24px 24px;
+    padding: 8px 24px 24px;
     border-bottom: 1px solid var(--border);
     box-shadow: 0 8px 24px rgba(0,0,0,0.06);
     gap: 0;
+    list-style: none;
   }
   .nav-links.open { display: flex; }
   .nav-links a {
+    display: block;
     font-size: 17px;
     color: var(--fg);
-    padding: 16px 4px;
+    padding: 22px 4px;
     border-bottom: 1px solid var(--border);
   }
+  .nav-links li { list-style: none; }
   .nav-links a:last-child { border-bottom: none; }
   .nav-cta { display: none; }
   .burger { display: flex; }
@@ -663,6 +666,8 @@ hr.app-hr { border: none; border-top: 1px solid var(--border); }
   }
   nav.app-nav:has(.nav-links.open) .nav-logo { color: var(--fg); }
   nav.app-nav:has(.nav-links.open) .burger span { background: var(--fg); }
+  nav.app-nav:has(.nav-links.open) .nav-links a { color: var(--fg); }
+  .nav-links.open a { color: var(--fg) !important; }
 }
 
 /* ─── SUCCESS STATE ───────────────────────────────── */
