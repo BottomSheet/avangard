@@ -371,20 +371,32 @@ p { font-size: 16px; line-height: 1.7; color: var(--mid); font-weight: 400; }
 .why-item p { font-size: 14px; }
 
 /* ─── CATALOG ─────────────────────────────────────── */
-.catalog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  align-items: stretch; /* все карточки одной высоты */
+}
 
 .catalog-card {
-  border: 1px solid var(--border); border-radius: var(--radius);
-  overflow: hidden; transition: box-shadow 0.2s;
-  display: flex; flex-direction: column;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* тянемся на всю высоту grid-ячейки */
 }
 
 .catalog-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.08); }
 
 .catalog-img {
-  height: 180px; background: var(--card);
+  height: 180px;
+  flex-shrink: 0; /* картинка всегда фикс. высоты, не сжимается */
+  background: var(--card);
   display: flex; align-items: center; justify-content: center;
-  border-bottom: 1px solid var(--border); position: relative;
+  border-bottom: 1px solid var(--border);
+  position: relative;
   overflow: hidden;
 }
 
@@ -394,7 +406,6 @@ p { font-size: 16px; line-height: 1.7; color: var(--mid); font-weight: 400; }
   position: relative; z-index: 1;
 }
 
-/* striped placeholder */
 .catalog-img::before {
   content: ''; position: absolute; inset: 0;
   background-image: repeating-linear-gradient(
@@ -407,17 +418,42 @@ p { font-size: 16px; line-height: 1.7; color: var(--mid); font-weight: 400; }
 
 .catalog-body {
   padding: 24px;
-  display: flex; flex-direction: column;
-  flex: 1;
+  display: flex;
+  flex-direction: column;
+  flex: 1; /* занимает всё свободное место под картинкой */
 }
-.catalog-body h3 { font-size: 17px; font-weight: 400; margin-bottom: 8px; }
-.catalog-body p { font-size: 14px; margin-bottom: 12px; }
-.catalog-price { font-size: 15px; font-weight: 400; margin-bottom: 0; }
+
+.catalog-body h3 {
+  font-size: 17px;
+  font-weight: 400;
+  margin-bottom: 8px;
+  /* фикс. высота на 2 строки чтобы заголовки выравнивались */
+  min-height: calc(1.15em * 2);
+  line-height: 1.15;
+}
+
+.catalog-body p {
+  font-size: 14px;
+  margin-bottom: 16px;
+  /* НЕ задаём min-height — пусть текст идёт как есть,
+     а цена и кнопки прижмутся к низу через margin-top: auto */
+}
+
+.catalog-price {
+  font-size: 15px;
+  font-weight: 400;
+  margin-top: auto; /* ← ключевое: прижимаем цену к низу */
+  margin-bottom: 16px;
+  padding-top: 8px;
+}
+
 .catalog-price span { color: var(--mid); font-weight: 300; font-size: 13px; }
+
 .catalog-actions {
-  margin-top: 20px;
   display: flex;
   gap: 10px;
+  /* margin-top убран — цена уже прижата к низу через auto,
+     а actions идут сразу за ценой с фикс. отступом */
 }
 
 .catalog-actions .btn {
@@ -430,7 +466,6 @@ p { font-size: 16px; line-height: 1.7; color: var(--mid); font-weight: 400; }
   align-items: center;
   justify-content: center;
 }
-
 /* ─── PROCESS ─────────────────────────────────────── */
 .process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
 
@@ -598,17 +633,24 @@ p { font-size: 16px; line-height: 1.7; color: var(--mid); font-weight: 400; }
 
 /* ─── CLIENTS ─────────────────────────────────────── */
 .clients-grid {
-  display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  align-items: stretch; /* одинаковая высота карточек */
 }
 
 .client-card {
-  border: 1px solid var(--border); border-radius: var(--radius);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
   padding: 28px 22px;
-  display: flex; flex-direction: column; gap: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
   background: var(--bg);
   transition: box-shadow 0.2s, transform 0.2s;
   min-height: 240px;
   width: 100%;
+  height: 100%; /* тянемся на всю высоту */
   box-sizing: border-box;
 }
 
@@ -618,10 +660,14 @@ p { font-size: 16px; line-height: 1.7; color: var(--mid); font-weight: 400; }
 }
 
 .client-logo {
-  flex: 1;
-  background: var(--card); border-radius: var(--radius-sm);
-  display: flex; align-items: center; justify-content: center;
-  padding: 24px 16px; min-height: 110px;
+  flex-shrink: 0;            /* лого больше не растягивается */
+  height: 110px;             /* фикс. высота вместо flex:1 + min-height */
+  background: var(--card);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
   width: 100%;
 }
 
@@ -635,8 +681,25 @@ p { font-size: 16px; line-height: 1.7; color: var(--mid); font-weight: 400; }
   color: var(--mid); font-weight: 400; margin-top: 4px;
 }
 
-.client-info h3 { font-size: 14px; font-weight: 400; margin-bottom: 6px; }
-.client-info p { font-size: 12px; line-height: 1.55; }
+.client-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1; /* инфо-блок занимает всё оставшееся место — выравнивает карточки */
+}
+
+.client-info h3 {
+  font-size: 14px;
+  font-weight: 400;
+  margin-bottom: 6px;
+  min-height: calc(1.4em * 2); /* 2 строки заголовка во всех карточках */
+  line-height: 1.4;
+}
+
+.client-info p {
+  font-size: 12px;
+  line-height: 1.55;
+  margin: 0;
+}
 
 /* ─── FOOTER (extended) ───────────────────────────── */
 footer.app-footer {
@@ -1408,10 +1471,19 @@ hr.app-hr { border: none; border-top: 1px solid var(--border); }
     gap: 12px;
     min-height: 180px;
   }
-  .client-logo { padding: 14px 8px; min-height: 80px; }
+  .client-logo {
+  padding: 14px 8px;
+  height: 80px;       /* вместо min-height */
+  flex-shrink: 0;
+}
+.client-info h3 {
+  font-size: 12.5px;
+  margin-bottom: 4px;
+  min-height: calc(1.4em * 2);
+  line-height: 1.4;
+}
   .client-logo-text { font-size: 14px; }
   .client-logo-text small { font-size: 8px; margin-top: 3px; }
-  .client-info h3 { font-size: 12.5px; margin-bottom: 4px; }
   .client-info p { font-size: 11.5px; line-height: 1.45; }
 
   /* ─── WHY US (направления) — 2 в ряд ──────────────────────── */
@@ -1427,9 +1499,20 @@ hr.app-hr { border: none; border-top: 1px solid var(--border); }
   .catalog-img { height: 110px; }
   .catalog-img-label { font-size: 9px; padding: 8px; }
   .catalog-body { padding: 14px 12px; }
-  .catalog-body h3 { font-size: 14px; margin-bottom: 6px; }
-  .catalog-body p { font-size: 12px; line-height: 1.45; margin-bottom: 20px; }
-  .catalog-price { font-size: 13px; margin-bottom: 30px; }
+  .catalog-body h3 {
+    font-size: 14px;
+    margin-bottom: 6px;
+    min-height: calc(1.35em * 2); /* 2 строки */
+  }
+  .catalog-body p {
+    font-size: 12px;
+    line-height: 1.45;
+    margin-bottom: 12px;
+  }
+  .catalog-price {
+    font-size: 13px;
+    margin-bottom: 12px; /* фикс. отступ, без 30px */
+  }
   .catalog-price span { font-size: 11px; }
 .catalog-actions {
   flex-direction: column;
