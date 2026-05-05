@@ -414,7 +414,22 @@ p { font-size: 16px; line-height: 1.7; color: var(--mid); font-weight: 400; }
 .catalog-body p { font-size: 14px; margin-bottom: 16px; }
 .catalog-price { font-size: 15px; font-weight: 400; margin-bottom: 16px; }
 .catalog-price span { color: var(--mid); font-weight: 300; font-size: 13px; }
-.catalog-body .btn { margin-top: auto; align-self: flex-start; }
+.catalog-actions {
+  margin-top: auto;
+  display: flex;
+  gap: 12px;                    /* уменьшили большой отступ */
+  justify-content: stretch;     /* кнопки растягиваются на всю ширину */
+}
+
+.catalog-actions .btn {
+  flex: 1;                      /* обе кнопки одинакового размера */
+  text-align: center;
+  padding: 10px 16px;           /* можно подрегулировать */
+  min-height: 42px;             /* одинаковая высота */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
 
 /* ─── PROCESS ─────────────────────────────────────── */
 .process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
@@ -593,6 +608,8 @@ p { font-size: 16px; line-height: 1.7; color: var(--mid); font-weight: 400; }
   background: var(--bg);
   transition: box-shadow 0.2s, transform 0.2s;
   min-height: 240px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .client-card:hover {
@@ -605,6 +622,7 @@ p { font-size: 16px; line-height: 1.7; color: var(--mid); font-weight: 400; }
   background: var(--card); border-radius: var(--radius-sm);
   display: flex; align-items: center; justify-content: center;
   padding: 24px 16px; min-height: 110px;
+  width: 100%;
 }
 
 .client-logo-text {
@@ -1130,11 +1148,53 @@ hr.app-hr { border: none; border-top: 1px solid var(--border); }
 
 /* ─── RELATED SCROLLER ────────────────────────────── */
 .related-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
   margin-bottom: 40px;
+  flex-wrap: wrap;
 }
 
 .related-title {
   margin: 0;
+}
+
+.related-controls {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.related-arrow {
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--bg);
+  color: var(--fg);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, color 0.2s, border-color 0.2s, opacity 0.2s;
+  font-family: inherit;
+  padding: 0;
+}
+
+.related-arrow:hover:not(:disabled) {
+  background: var(--fg);
+  color: var(--bg);
+  border-color: var(--fg);
+}
+
+.related-arrow:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.related-arrow svg {
+  display: block;
 }
 
 .related-track {
@@ -1167,10 +1227,25 @@ hr.app-hr { border: none; border-top: 1px solid var(--border); }
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
   cursor: grab;
+  /* Запрещаем выделение текста при drag-скролле */
+  user-select: none;
+  -webkit-user-select: none;
 }
 
-.related-scroller:active {
+.related-scroller.is-dragging {
   cursor: grabbing;
+  scroll-snap-type: none; /* во время drag отключаем snap */
+}
+
+.related-scroller.is-dragging .related-card {
+  /* Не реагируем на ховер карточек во время перетаскивания */
+  pointer-events: none;
+}
+
+/* Если карточек мало и не нужно листать — отцентровываем */
+.related-scroller.no-overflow {
+  cursor: default;
+  justify-content: flex-start;
 }
 
 .related-scroller::-webkit-scrollbar {
@@ -1180,11 +1255,43 @@ hr.app-hr { border: none; border-top: 1px solid var(--border); }
 .related-card {
   flex: 0 0 300px;
   scroll-snap-align: start;
+  /* Картинки внутри карточки не таскаются вместе с курсором */
+  -webkit-user-drag: none;
+}
+
+.related-card * {
+  -webkit-user-drag: none;
+}
+
+/* Индикатор позиции — тонкая полоса под скроллером */
+.related-progress {
+  margin-top: 8px;
+  height: 2px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.related-progress-bar {
+  position: absolute;
+  inset: 0;
+  width: 33%; /* видимая часть = 1/3, сдвигается через transform */
+  background: var(--fg);
+  border-radius: 2px;
+  transition: transform 0.15s ease-out;
+  will-change: transform;
 }
 
 @media (max-width: 768px) {
   .related-head {
     margin-bottom: 28px;
+    align-items: flex-start;
+  }
+
+  .related-controls {
+    /* На мобиле прячем стрелки — пользователь листает пальцем */
+    display: none;
   }
 
   .related-track {
@@ -1209,4 +1316,350 @@ hr.app-hr { border: none; border-top: 1px solid var(--border); }
   .related-card {
     flex-basis: 260px;
   }
+}
+/* ════════════════════════════════════════════════════════════════════
+   MOBILE COMPACT OVERRIDES
+   Переопределяет/дополняет мобильные стили выше для большей
+   компактности и симметрии. Десктопные правила НЕ затрагиваются.
+   ════════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  /* ─── Базовые: симметричные отступы по 16px от стенок ──────────── */
+  .wrap { padding: 0 16px; }
+  .nav-inner { padding: 0 16px; }
+  .footer-inner { padding: 0 16px; }
+  .hero-content,
+  .page-hero-content { padding-left: 16px; padding-right: 16px; }
+
+  /* Симметричные вертикальные отступы секций */
+  section { padding: 48px 0; }
+
+  /* Типографика — компактнее, но читаемо */
+  h1 { font-size: 30px; line-height: 1.2; }
+  h2 { font-size: 22px; line-height: 1.25; }
+  h3 { font-size: 16px; line-height: 1.35; }
+  p { font-size: 14px; line-height: 1.6; }
+
+  /* Лейблы секций — поменьше */
+  .section-label { font-size: 10px; margin-bottom: 14px; }
+
+  /* Кнопки — компактнее, но кликабельные */
+  .btn { padding: 13px 24px; font-size: 14px; }
+  .btn-sm { padding: 9px 18px; font-size: 12px; }
+
+  /* ─── HERO главной ───────────────────────────────────────────── */
+  .hero-eyebrow { font-size: 10px; margin-bottom: 18px; }
+  .hero h1 { margin-bottom: 18px; }
+  .hero p { font-size: 15px; margin-bottom: 28px; }
+  .hero-actions { gap: 10px; margin-bottom: 40px; flex-wrap: nowrap; }
+  .hero-actions .btn {
+    flex: 1;
+    justify-content: center;
+    min-width: 0;
+    padding: 13px 12px;
+    font-size: 13px;
+  }
+  .hero-content { padding-bottom: 36px; }
+
+  /* Hero direction cards — компактные строки */
+  .hero-dirs { margin: 0 -16px; padding: 0 16px; }
+  .hero-dir {
+    padding: 18px 0;
+  }
+  .hero-dir-num { margin-bottom: 6px; font-size: 10px; }
+  .hero-dir-title { font-size: 16px; margin-bottom: 4px; }
+  .hero-dir-sub { font-size: 13px; }
+
+  /* ─── PAGE HERO (Материалы / Спецтехника / Услуги) ─────────── */
+  .page-hero { min-height: 38vh; }
+  .page-hero-content { padding-bottom: 36px; }
+  .page-hero h1 { font-size: 32px; margin-bottom: 10px; }
+  .page-hero p { font-size: 14px; margin-top: 12px; }
+  .page-hero .hero-eyebrow { margin-bottom: 16px; }
+
+  /* ─── ABOUT (Главная) — статистика 2×2 компактно ──────────── */
+  .about-grid { grid-template-columns: 1fr; gap: 32px; }
+  .about-stats { gap: 10px; margin-top: 28px; }
+  .stat-card { padding: 18px 16px; }
+  .stat-num { font-size: 28px; margin-bottom: 4px; }
+  .stat-label { font-size: 11px; }
+  .about-text p { margin-bottom: 14px; font-size: 14px; }
+
+  /* ─── DIRECTIONS + ADVANTAGES (Главная) — 2 в ряд ──────────── */
+  .dir-adv-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .dir-card { padding: 22px 16px; gap: 10px; }
+  .dir-card-icon { width: 36px; height: 36px; font-size: 16px; }
+  .dir-card h3 { font-size: 15px; }
+  .dir-card p { font-size: 12.5px; line-height: 1.5; }
+  .dir-card-link { font-size: 11px; }
+
+  .adv-card { padding: 22px 16px; gap: 8px; }
+  .adv-num { font-size: 10px; }
+  .adv-card h3 { font-size: 15px; }
+  .adv-card p { font-size: 12.5px; line-height: 1.5; }
+
+  /* ─── CLIENTS (Главная) — 2 в ряд компактно ──────────────── */
+  .clients-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .client-card {
+    padding: 16px 12px;
+    gap: 12px;
+    min-height: 180px;
+  }
+  .client-logo { padding: 14px 8px; min-height: 80px; }
+  .client-logo-text { font-size: 14px; }
+  .client-logo-text small { font-size: 8px; margin-top: 3px; }
+  .client-info h3 { font-size: 12.5px; margin-bottom: 4px; }
+  .client-info p { font-size: 11.5px; line-height: 1.45; }
+
+  /* ─── WHY US (направления) — 2 в ряд ──────────────────────── */
+  .why-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .why-item { padding: 20px 14px; }
+  .why-icon { font-size: 22px; margin-bottom: 10px; }
+  .why-item h3 { font-size: 14px; margin-bottom: 6px; }
+  .why-item p { font-size: 12.5px; line-height: 1.5; }
+
+  /* ─── CATALOG — 2 в ряд (главное требование) ─────────────── */
+  .catalog-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .catalog-card { display: flex; flex-direction: column; }
+  .catalog-img { height: 110px; }
+  .catalog-img-label { font-size: 9px; padding: 8px; }
+  .catalog-body { padding: 14px 12px; }
+  .catalog-body h3 { font-size: 14px; margin-bottom: 6px; }
+  .catalog-body p { font-size: 12px; line-height: 1.45; margin-bottom: 30px; }
+  .catalog-price { font-size: 13px; margin-bottom: 12px; }
+  .catalog-price span { font-size: 11px; }
+  .catalog-actions {
+  flex-direction: column;
+  gap: 10px;
+}
+
+.catalog-actions .btn {
+  flex: 0 0 auto;
+  width: auto;
+  min-width: 130px;
+  max-width: 100%;           
+  margin: 0 0;
+  font-size: 13px;
+  line-height: 0.2;
+  min-height: 35px;              
+}
+
+  /* ─── PROCESS — компактный одностолбик ───────────────────── */
+  .process-step { padding: 24px 0; }
+  .process-num { font-size: 32px; margin-bottom: 12px; }
+  .process-step h3 { font-size: 15px; margin-bottom: 6px; }
+  .process-step p { font-size: 13px; }
+
+  /* В карточке товара process-steps идёт в рамке — компактим */
+  .product-content .process-steps { display: block; }
+  .product-content .process-step {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    padding: 22px 18px;
+  }
+  .product-content .process-step:last-child { border-bottom: none; }
+  .product-content .process-num { font-size: 28px; margin-bottom: 10px; }
+
+  /* ─── WORK TYPES — 2 в ряд (стр. Спецтехники) ───────────── */
+  .works-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .work-card { flex-direction: column; gap: 12px; padding: 20px 14px; }
+  .work-icon-box { width: 38px; height: 38px; font-size: 18px; }
+  .work-card h3 { font-size: 14px; margin-bottom: 6px; }
+  .work-card p { font-size: 12.5px; line-height: 1.5; }
+
+  /* ─── SERVICES list (стр. Услуги) — 2 в ряд ─────────────── */
+  .services-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .service-card { padding: 20px 14px; }
+  .service-card h3 { font-size: 14px; margin-bottom: 8px; }
+  .service-card p { font-size: 12.5px; line-height: 1.5; }
+
+  /* ─── DELIVERY (стр. Материалы) ─────────────────────────── */
+  .delivery-card { gap: 28px; padding: 28px 18px; }
+  .delivery-features { gap: 14px; margin-top: 20px; }
+  .delivery-feat { gap: 12px; }
+  .delivery-feat-text h4 { font-size: 14px; }
+  .delivery-feat-text p { font-size: 13px; }
+  .delivery-stats { gap: 14px; }
+
+  /* ─── GALLERY ──────────────────────────────────────────── */
+  .gallery-grid { gap: 8px; grid-template-rows: 140px 140px; }
+  .gallery-label { font-size: 9px; }
+
+  /* ─── CONTACT (на тёмном фоне) ─────────────────────────── */
+  .contact-grid { gap: 28px; }
+  .contact-section h2 { font-size: 22px; }
+  .contact-details { gap: 14px; margin-top: 24px; }
+  .contact-item-label { font-size: 10px; }
+  .contact-item-val { font-size: 14px; }
+  .form-card { padding: 24px 20px; }
+  .form-card h3 { font-size: 17px; }
+  .form-card > p { font-size: 13px; margin-bottom: 20px; }
+  .form-group { margin-bottom: 12px; }
+  .form-group label { font-size: 10px; margin-bottom: 6px; }
+  .form-group input { padding: 12px 14px; font-size: 14px; }
+  .form-btn { padding: 14px; font-size: 14px; }
+
+  /* ─── FOOTER — direction+info в 2 столбика, остальное в 1 ── */
+  .app-footer { padding: 48px 0 22px; }
+  .footer-top {
+    grid-template-columns: 1fr 1fr;
+    gap: 28px 16px;
+    padding-bottom: 32px;
+  }
+  /* Бренд и контакты — на всю ширину */
+  .footer-brand,
+  .footer-col:last-child {
+    grid-column: 1 / -1;
+  }
+  .footer-brand .footer-logo { font-size: 18px; margin-bottom: 10px; }
+  .footer-brand p { font-size: 12.5px; }
+  .footer-col-title { font-size: 10px; margin-bottom: 14px; }
+  .footer-col ul { gap: 9px; }
+  .footer-col a, .footer-col li { font-size: 12.5px; }
+  .footer-contact-item { margin-bottom: 12px; gap: 3px; }
+  .footer-contact-item span:first-child { font-size: 9px; }
+  .footer-contact-item a,
+  .footer-contact-item span:last-child { font-size: 13px; }
+  .footer-bottom { padding-top: 22px; gap: 10px; }
+  .footer-copy, .footer-meta { font-size: 11px; }
+  .footer-legal { gap: 14px; }
+  .footer-legal a { font-size: 11px; }
+
+  /* ─── PRODUCT PAGE — карточка товара ────────────────────── */
+  .breadcrumbs { padding: calc(var(--nav-h) + 14px) 0 0; font-size: 11px; }
+  .breadcrumbs ul { gap: 8px; }
+  .breadcrumbs li { gap: 8px; }
+
+  .product-top { padding: 18px 0 32px; }
+  .product-grid { gap: 28px; }
+  .product-main-img { height: 240px; border-radius: var(--radius-sm); }
+  .product-thumbs { gap: 8px; }
+  .product-thumb { height: 64px; }
+
+  .product-info-eyebrow { font-size: 10px; margin-bottom: 12px; }
+  .product-info h1 { font-size: 28px; margin-bottom: 12px; }
+  .product-info-tagline { font-size: 14px; margin-bottom: 24px; }
+
+  /* Quick params — 3 в ряд (важно: больше в строчку) */
+  .product-quick {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+  .quick-item { padding: 12px 10px; }
+  .quick-item-label { font-size: 9px; margin-bottom: 4px; }
+  .quick-item-val { font-size: 13px; }
+
+  /* Цена + мин. заказ — в строчку, симметрично */
+  .product-price-row {
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 18px 0;
+    margin-bottom: 22px;
+    gap: 16px;
+  }
+  .product-price-label { font-size: 10px; margin-bottom: 4px; }
+  .product-price-val { font-size: 22px; }
+  .product-price-val small { font-size: 11px; display: block; margin-top: 2px; }
+  .product-price-val.is-min { font-size: 16px; }
+
+  /* Кнопки заявки — 2 в строчку */
+  .product-actions { gap: 8px; margin-bottom: 20px; flex-wrap: nowrap; }
+  .product-actions .btn {
+    flex: 1;
+    min-width: 0;
+    padding: 12px 10px;
+    font-size: 13px;
+  }
+
+  .product-meta-list { gap: 10px; font-size: 12.5px; }
+
+  /* Контентные блоки */
+  .content-block { margin-bottom: 44px; }
+  .content-block h2 { margin-bottom: 22px; }
+  .content-block .lead { font-size: 14px; line-height: 1.65; margin-bottom: 14px; }
+  .content-block p { font-size: 13px; margin-bottom: 12px; }
+
+  /* Применение — 2 в ряд */
+  .applications-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .app-item { padding: 18px 14px; }
+  .app-item-num { font-size: 10px; margin-bottom: 10px; }
+  .app-item h3 { font-size: 13px; margin-bottom: 6px; }
+  .app-item p { font-size: 12px; line-height: 1.5; }
+
+  /* Specs — компактнее */
+  .specs-grid { padding: 4px 18px; }
+  .specs-row { padding: 14px 0; gap: 14px; }
+  .specs-key { font-size: 12px; }
+  .specs-val { font-size: 12.5px; }
+
+  /* Фракции — 1 в ряд (там цена, лучше столбиком) но компактно */
+  .fractions-grid { gap: 10px; }
+  .fraction-card { padding: 22px 18px; gap: 10px; }
+  .fraction-num { font-size: 26px; }
+  .fraction-card h3 { font-size: 14px; }
+  .fraction-card p { font-size: 12.5px; line-height: 1.5; }
+  .fraction-price { font-size: 13px; padding-top: 10px; }
+
+  /* Тарифы (для техники) */
+  .pricing-row { padding: 16px 18px; }
+  .pricing-row .pkey { font-size: 13px; }
+  .pricing-row .pval { font-size: 12.5px; }
+
+  /* Условия поставки/аренды */
+  .delivery-mini { padding: 24px 18px; gap: 22px; }
+  .delivery-mini h3 { font-size: 18px; margin-bottom: 8px; }
+  .delivery-mini p { font-size: 13px; }
+  .delivery-mini-list { gap: 12px; }
+  .delivery-mini-list span { font-size: 12.5px; }
+  .delivery-mini-list span small { font-size: 11px; }
+
+  /* Related скроллер — карточки чуть компактнее */
+  .related-track {
+    margin: 0 -16px;
+    padding: 0 16px;
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 32px,
+      black calc(100% - 32px),
+      transparent
+    );
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 32px,
+      black calc(100% - 32px),
+      transparent
+    );
+  }
+  .related-card { flex-basis: 230px; }
+  .related-head { margin-bottom: 22px; }
+}
+
+/* Узкие телефоны — дополнительная компактность */
+@media (max-width: 380px) {
+  .wrap, .nav-inner, .footer-inner { padding: 0 14px; }
+  .hero-content, .page-hero-content { padding-left: 14px; padding-right: 14px; }
+  h1 { font-size: 27px; }
+  .product-info h1 { font-size: 25px; }
+
+  /* Quick параметры — текст ещё мельче, чтобы 3 в ряд не ломались */
+  .quick-item { padding: 10px 8px; }
+  .quick-item-label { font-size: 8.5px; letter-spacing: 0.06em; }
+  .quick-item-val { font-size: 12px; }
+
+  /* Хлебные крошки — однострочно с переносом */
+  .breadcrumbs { font-size: 10.5px; }
+
+  /* Catalog cards — ещё компактнее */
+  .catalog-img { height: 96px; }
+  .catalog-body { padding: 12px 10px; }
+  .catalog-body h3 { font-size: 13px; }
+  .catalog-body p { font-size: 11.5px; }
+
+  .related-card { flex-basis: 210px; }
 }

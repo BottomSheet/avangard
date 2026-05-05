@@ -31,6 +31,11 @@ const routes = [
     name: 'services',
     component: () => import('@/views/ServicesView.vue')
   },
+  {
+    path: '/services/:slug',
+    name: 'service-product',
+    component: () => import('@/views/ServiceProductView.vue')
+  },
   // catch-all → редирект на главную
   { path: '/:pathMatch(.*)*', redirect: '/' }
 ]

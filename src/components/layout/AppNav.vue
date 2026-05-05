@@ -10,7 +10,9 @@ const route = useRoute()
 // На страницах без тёмного hero-блока (карточки товара) шапка всегда в scrolled-виде,
 // иначе белый текст шапки сливается со светлым фоном страницы.
 const forceScrolled = computed(() => {
-  return route.name === 'material-product' || route.name === 'equipment-product'
+  return route.name === 'material-product'
+    || route.name === 'equipment-product'
+    || route.name === 'service-product'
 })
 
 const navScrolled = computed(() => scrolled.value || forceScrolled.value)

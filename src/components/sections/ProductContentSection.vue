@@ -1,8 +1,85 @@
 <script setup>
-defineProps({
+import { computed } from 'vue'
+
+const props = defineProps({
   data: { type: Object, required: true },
-  // 'material' (с фракциями) | 'equipment' (с тарифной таблицей)
+  // 'material' (с фракциями) | 'equipment' (с тарифной таблицей) | 'service' (с этапами/вариантами)
   kind: { type: String, default: 'material' }
+})
+
+// Подписи секций в зависимости от типа карточки
+const labels = computed(() => {
+  if (props.kind === 'equipment') {
+    return {
+      applicationsLabel: 'Виды работ',
+      applicationsTitle: 'Что умеет машина',
+      specsTitle: 'Технические параметры',
+      variantsLabel: 'Тарифы',
+      variantsTitle: 'Стоимость аренды',
+      conditionsLabel: 'Условия',
+      conditionsTitle: 'Аренда и доставка',
+      conditionsHeading: 'Собственный парк техники',
+      conditionsText: 'Регулярное ТО и резервные машины — работаем без срывов сроков. Доставляем технику на объект собственным транспортом.'
+    }
+  }
+  if (props.kind === 'service') {
+    return {
+      applicationsLabel: 'Применение',
+      applicationsTitle: 'Где применяется',
+      specsTitle: 'Параметры услуги',
+      variantsLabel: 'Варианты исполнения',
+      variantsTitle: 'Уровни выполнения работ',
+      conditionsLabel: 'Условия выполнения',
+      conditionsTitle: 'Как мы работаем',
+      conditionsHeading: 'Полный цикл под ключ',
+      conditionsText: 'Берём на себя все этапы — от выезда инженера и проектирования до сдачи объекта с исполнительной документацией. Гарантия по договору.'
+    }
+  }
+  // material — по умолчанию
+  return {
+    applicationsLabel: 'Применение',
+    applicationsTitle: 'Где используется',
+    specsTitle: 'Технические свойства',
+    variantsLabel: 'Фракции и цены',
+    variantsTitle: 'Доступные варианты',
+    conditionsLabel: 'Доставка и оплата',
+    conditionsTitle: 'Условия поставки',
+    conditionsHeading: 'Собственный автопарк',
+    conditionsText: 'Доставляем материал самосвалами от 10 до 30 тонн. Подбираем подходящую машину под объём заказа и условия подъезда к объекту.'
+  }
+})
+
+// Список условий справа (правая колонка delivery-mini)
+const conditionsList = computed(() => {
+  if (props.kind === 'equipment') {
+    return [
+      { main: 'Доставка на объект', sub: 'в пределах 150 км от точки базирования' },
+      { main: 'Минимальный срок аренды', sub: 'смена 8 часов или сутки' },
+      { main: 'Оператор включён в стоимость', sub: 'опыт работы от 5 лет' },
+      { main: 'Оплата', sub: 'наличные, карта, банковский перевод, расчётный счёт' }
+    ]
+  }
+  if (props.kind === 'service') {
+    return [
+      { main: 'Выезд инженера', sub: 'бесплатно в пределах 50 км — замер и смета' },
+      { main: 'Договор и смета', sub: 'фиксированная стоимость, прозрачная детализация' },
+      { main: 'Документы по объекту', sub: 'ППР, акты, исполнительная съёмка, гарантия' },
+      { main: 'Оплата', sub: 'наличные, карта, банковский перевод, расчётный счёт' }
+    ]
+  }
+  return [
+    { main: 'Доставка день в день', sub: 'при заявке до 12:00' },
+    { main: 'Радиус доставки 150 км', sub: 'от точки отгрузки' },
+    { main: 'Документы при отгрузке', sub: 'ТТН, паспорт качества, счёт-фактура' },
+    { main: 'Оплата', sub: 'наличные, карта, банковский перевод, расчётный счёт' }
+  ]
+})
+
+// Показываем ли блок «вариантов» (фракции/тарифы/уровни)
+const showVariants = computed(() => {
+  if (props.kind === 'equipment') return !!props.data.pricing
+  // material и service используют data.fractions
+  return !!props.data.fractions
 })
 </script>
 
@@ -18,10 +95,10 @@ defineProps({
         <p>{{ data.description.body }}</p>
       </div>
 
-      <!-- Применения -->
+      <!-- Применения / Виды работ -->
       <div class="content-block">
-        <div class="section-label">{{ kind === 'equipment' ? 'Виды работ' : 'Применение' }}</div>
-        <h2>{{ kind === 'equipment' ? 'Что умеет машина' : 'Где используется' }}</h2>
+        <div class="section-label">{{ labels.applicationsLabel }}</div>
+        <h2>{{ labels.applicationsTitle }}</h2>
         <div class="applications-grid">
           <div v-for="app in data.applications" :key="app.num" class="app-item">
             <div class="app-item-num">— {{ app.num }}</div>
@@ -31,10 +108,10 @@ defineProps({
         </div>
       </div>
 
-      <!-- Технические характеристики -->
+      <!-- Характеристики -->
       <div class="content-block">
         <div class="section-label">Характеристики</div>
-        <h2>{{ kind === 'equipment' ? 'Технические параметры' : 'Технические свойства' }}</h2>
+        <h2>{{ labels.specsTitle }}</h2>
         <div class="specs-grid">
           <div v-for="(row, idx) in data.specs" :key="idx" class="specs-row">
             <span class="specs-key">{{ row[0] }}</span>
@@ -43,10 +120,10 @@ defineProps({
         </div>
       </div>
 
-      <!-- Фракции (для материалов) -->
-      <div v-if="kind === 'material' && data.fractions" class="content-block">
-        <div class="section-label">Фракции и цены</div>
-        <h2>Доступные варианты</h2>
+      <!-- Фракции (material/service) -->
+      <div v-if="showVariants && kind !== 'equipment'" class="content-block">
+        <div class="section-label">{{ labels.variantsLabel }}</div>
+        <h2>{{ labels.variantsTitle }}</h2>
         <div class="fractions-grid">
           <div v-for="f in data.fractions" :key="f.num" class="fraction-card">
             <div class="fraction-num">{{ f.num }}</div>
@@ -59,10 +136,10 @@ defineProps({
         </div>
       </div>
 
-      <!-- Тарифы (для техники) -->
+      <!-- Тарифы (equipment) -->
       <div v-if="kind === 'equipment' && data.pricing" class="content-block">
-        <div class="section-label">Тарифы</div>
-        <h2>Стоимость аренды</h2>
+        <div class="section-label">{{ labels.variantsLabel }}</div>
+        <h2>{{ labels.variantsTitle }}</h2>
         <div class="pricing-table">
           <div class="pricing-row head">
             <div class="pkey">Услуга</div>
@@ -81,35 +158,19 @@ defineProps({
         </p>
       </div>
 
-      <!-- Условия поставки / аренды -->
+      <!-- Условия / поставка / выполнение -->
       <div class="content-block">
-        <div class="section-label">{{ kind === 'equipment' ? 'Условия' : 'Доставка и оплата' }}</div>
-        <h2>{{ kind === 'equipment' ? 'Аренда и доставка' : 'Условия поставки' }}</h2>
+        <div class="section-label">{{ labels.conditionsLabel }}</div>
+        <h2>{{ labels.conditionsTitle }}</h2>
         <div class="delivery-mini">
           <div>
-            <h3>{{ kind === 'equipment' ? 'Собственный парк техники' : 'Собственный автопарк' }}</h3>
-            <p v-if="kind === 'equipment'">
-              Регулярное ТО и резервные машины — работаем без срывов сроков.
-              Доставляем технику на объект собственным транспортом.
-            </p>
-            <p v-else>
-              Доставляем материал самосвалами от 10 до 30 тонн.
-              Подбираем подходящую машину под объём заказа и условия подъезда к объекту.
-            </p>
+            <h3>{{ labels.conditionsHeading }}</h3>
+            <p>{{ labels.conditionsText }}</p>
           </div>
           <div class="delivery-mini-list">
-            <template v-if="kind === 'equipment'">
-              <div><span>Доставка на объект <small>в пределах 150 км от точки базирования</small></span></div>
-              <div><span>Минимальный срок аренды <small>смена 8 часов или сутки</small></span></div>
-              <div><span>Оператор включён в стоимость <small>опыт работы от 5 лет</small></span></div>
-              <div><span>Оплата <small>наличные, карта, банковский перевод, расчётный счёт</small></span></div>
-            </template>
-            <template v-else>
-              <div><span>Доставка день в день <small>при заявке до 12:00</small></span></div>
-              <div><span>Радиус доставки 150 км <small>от точки отгрузки</small></span></div>
-              <div><span>Документы при отгрузке <small>ТТН, паспорт качества, счёт-фактура</small></span></div>
-              <div><span>Оплата <small>наличные, карта, банковский перевод, расчётный счёт</small></span></div>
-            </template>
+            <div v-for="(c, idx) in conditionsList" :key="idx">
+              <span>{{ c.main }} <small>{{ c.sub }}</small></span>
+            </div>
           </div>
         </div>
       </div>
