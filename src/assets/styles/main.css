@@ -421,7 +421,7 @@ p { font-size: 16px; line-height: 1.7; color: var(--mid); font-weight: 400; }
   display: flex;
   flex-direction: column;
   flex: 1;
-  gap: 12px; /* единый ритм между всеми элементами карточки */
+  gap: 16px;               /* было 12px → стало 16px */
 }
 
 .catalog-body h3 {
@@ -446,9 +446,9 @@ p { font-size: 16px; line-height: 1.7; color: var(--mid); font-weight: 400; }
 .catalog-price {
   font-size: 15px;
   font-weight: 400;
-  margin-top: auto;          /* всё ещё прижимает футер к низу */
+  margin-top: auto;        /* остаётся — прижимает к низу */
   margin-bottom: 0;
-  padding-top: 4px;          /* небольшой воздух сверху */
+  padding-top: 0;          /* было 4px → убрали */
 }
 
 .catalog-price span {
@@ -460,7 +460,7 @@ p { font-size: 16px; line-height: 1.7; color: var(--mid); font-weight: 400; }
 .catalog-actions {
   display: flex;
   gap: 10px;
-  margin-top: 4px;           /* симметричный с padding-top у цены */
+  margin-top: 10px;           /* было 14px → убрали */
 }
 
 .catalog-actions .btn {
@@ -1507,7 +1507,7 @@ hr.app-hr { border: none; border-top: 1px solid var(--border); }
   .catalog-img-label { font-size: 9px; padding: 8px; }
   .catalog-body {
     padding: 14px 12px;
-    gap: 8px;                    /* единый ритм для мобилы */
+    gap: 12px;              /* было 8px → стало 12px для воздуха */
   }
   .catalog-body h3 {
     font-size: 14px;
@@ -1525,16 +1525,16 @@ hr.app-hr { border: none; border-top: 1px solid var(--border); }
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
-  .catalog-price {
+   .catalog-price {
     font-size: 13px;
     margin-bottom: 0;
-    padding-top: 2px;
+    padding-top: 0;         /* было 2px → убрали */
   }
   .catalog-price span { font-size: 11px; }
   .catalog-actions {
     flex-direction: column;
-    gap: 8px;
-    margin-top: 2px;
+    gap: 8px;               /* это gap МЕЖДУ кнопками внутри блока — оставляем */
+    margin-top: 8px;          /* было 12px → убрали */
   }
 
 .catalog-actions .btn {
