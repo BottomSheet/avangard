@@ -12,9 +12,19 @@ const routes = [
     component: () => import('@/views/MaterialsView.vue')
   },
   {
+    path: '/materials/:slug',
+    name: 'material-product',
+    component: () => import('@/views/MaterialProductView.vue')
+  },
+  {
     path: '/equipment',
     name: 'equipment',
     component: () => import('@/views/EquipmentView.vue')
+  },
+  {
+    path: '/equipment/:slug',
+    name: 'equipment-product',
+    component: () => import('@/views/EquipmentProductView.vue')
   },
   {
     path: '/services',

@@ -1,10 +1,20 @@
 <script setup>
-import { ref, nextTick, watch, onBeforeUnmount } from 'vue'
+import { ref, nextTick, computed } from 'vue'
 import { RouterLink, useRoute, useRouter } from 'vue-router'
 import { company, navLinks } from '@/data/site'
 import { useScrolled } from '@/composables/useScrolled'
 
 const { scrolled } = useScrolled(40)
+const route = useRoute()
+
+// На страницах без тёмного hero-блока (карточки товара) шапка всегда в scrolled-виде,
+// иначе белый текст шапки сливается со светлым фоном страницы.
+const forceScrolled = computed(() => {
+  return route.name === 'material-product' || route.name === 'equipment-product'
+})
+
+const navScrolled = computed(() => scrolled.value || forceScrolled.value)
+
 const menuOpen = ref(false)
 
 function toggleMenu() {
@@ -14,22 +24,6 @@ function toggleMenu() {
 function closeMenu() {
   menuOpen.value = false
 }
-
-// Блокируем скролл фона, когда мобильное меню открыто.
-// Делаем это только в мобильном размере, чтобы на десктопе ничего не трогать.
-watch(menuOpen, (open) => {
-  if (typeof document === 'undefined') return
-  const isMobileViewport = window.matchMedia('(max-width: 768px)').matches
-  if (open && isMobileViewport) {
-    document.body.style.overflow = 'hidden'
-  } else {
-    document.body.style.overflow = ''
-  }
-})
-
-onBeforeUnmount(() => {
-  if (typeof document !== 'undefined') document.body.style.overflow = ''
-})
 
 const router = useRouter()
 
@@ -47,11 +41,10 @@ async function goToContact() {
     document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }, 100)
 }
-
 </script>
 
 <template>
-  <nav class="app-nav" :class="{ 'nav-scrolled': scrolled }">
+  <nav class="app-nav" :class="{ 'nav-scrolled': navScrolled }">
     <div class="nav-inner">
       <RouterLink to="/" class="nav-logo">{{ company.name }}</RouterLink>
 
