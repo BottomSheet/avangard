@@ -62,20 +62,28 @@ let dragStartScroll = 0
 let dragMoved = false
 
 function onPointerDown(e) {
-  // только основная кнопка мыши, и не на ссылке (RouterLink сам обработает клик)
+  // Только основная кнопка мыши и только мышь
+  // (на тач-устройствах нативный скролл/тап работает сам — не вмешиваемся)
+  if (e.pointerType !== 'mouse') return
   if (e.button !== 0) return
   isDragging = true
   dragMoved = false
   dragStartX = e.clientX
   dragStartScroll = scrollerRef.value.scrollLeft
-  scrollerRef.value.classList.add('is-dragging')
+  // Класс is-dragging НЕ добавляем здесь — иначе pointer-events: none
+  // сразу отключит клик по карточке. Добавим только когда реально потащили.
 }
 
 function onPointerMove(e) {
   if (!isDragging) return
   const dx = e.clientX - dragStartX
-  if (Math.abs(dx) > 4) dragMoved = true
-  scrollerRef.value.scrollLeft = dragStartScroll - dx
+  if (Math.abs(dx) > 4) {
+    if (!dragMoved) {
+      dragMoved = true
+      scrollerRef.value?.classList.add('is-dragging')
+    }
+    scrollerRef.value.scrollLeft = dragStartScroll - dx
+  }
 }
 
 function onPointerUp() {
@@ -198,17 +206,21 @@ watch(() => props.items, async () => {
               <div class="catalog-price">
                 {{ item.price.value }} <span>{{ item.price.note }}</span>
               </div>
-              <span class="btn btn-outline btn-sm">Подробнее</span>
+              <div class="catalog-actions">
+                <span class="btn btn-outline btn-sm">Подробнее</span>
+              </div>
             </div>
           </RouterLink>
         </div>
       </div>
 
-      <!-- Индикатор позиции — тонкая полоса под скроллером -->
+      <!-- Индикатор позиции — тонкая полоса под скроллером.
+           Бегунок шириной 33% едет на (100/33 - 1) ≈ 203% своей ширины,
+           чтобы при progress = 1 правый край упирался в правый край дорожки. -->
       <div v-if="isOverflowing" class="related-progress" aria-hidden="true">
         <div
           class="related-progress-bar"
-          :style="{ transform: `translateX(${progress * 100}%)` }"
+          :style="{ transform: `translateX(${progress * 203}%)` }"
         ></div>
       </div>
     </div>

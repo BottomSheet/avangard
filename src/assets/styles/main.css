@@ -1176,12 +1176,11 @@ hr.app-hr { border: none; border-top: 1px solid var(--border); }
   h2 { font-size: 26px; }
   .hero-dirs { grid-template-columns: 1fr; }
   .hero-dir { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
-  .dir-adv-row, .why-grid, .catalog-grid, .process-steps, .works-grid, .services-grid { grid-template-columns: 1fr; }
+  .dir-adv-row, .why-grid, .catalog-grid, .works-grid, .services-grid { grid-template-columns: 1fr; }
   .about-grid, .contact-grid, .delivery-card { grid-template-columns: 1fr; gap: 40px; }
   .delivery-card { padding: 32px 24px; }
   .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
   .gallery-item.gallery-item-large { grid-column: span 2; grid-row: span 1; }
-  .process-step { border-right: none; border-bottom: 1px solid var(--border); }
   .footer-top { grid-template-columns: 1fr; gap: 40px; }
   .footer-bottom { flex-direction: column; align-items: flex-start; gap: 14px; }
   .clients-grid { grid-template-columns: 1fr 1fr; }
@@ -1345,12 +1344,16 @@ hr.app-hr { border: none; border-top: 1px solid var(--border); }
 
 .related-progress-bar {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
+  height: 100%;
   width: 33%; /* видимая часть = 1/3, сдвигается через transform */
   background: var(--fg);
   border-radius: 2px;
   transition: transform 0.15s ease-out;
   will-change: transform;
+  /* progress = 0..1 → translate от 0 до (100%/0.33 - 100%) собственной ширины,
+     чтобы правый край бегунка достигал правого края дорожки */
 }
 
 @media (max-width: 768px) {
@@ -1546,14 +1549,28 @@ hr.app-hr { border: none; border-top: 1px solid var(--border); }
   justify-content: center;
 }
 
-  /* ─── PROCESS — компактный одностолбик ───────────────────── */
-  .process-step { padding: 24px 0; }
-  .process-num { font-size: 32px; margin-bottom: 12px; }
-  .process-step h3 { font-size: 15px; margin-bottom: 6px; }
-  .process-step p { font-size: 13px; }
+  /* ─── PROCESS — 4 в ряд, компактно на мобильных ──────────── */
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
 
-  /* В карточке товара process-steps идёт в рамке — компактим */
-  .product-content .process-steps { display: block; }
+  .process-step {
+    padding: 18px 8px;
+    border-right: 1px solid var(--border);
+    border-bottom: none;
+  }
+  .process-step:last-child { border-right: none; }
+  .process-num { font-size: 22px; margin-bottom: 8px; }
+  .process-step h3 { font-size: 12px; margin-bottom: 4px; line-height: 1.25; }
+  .process-step p { font-size: 11px; line-height: 1.4; }
+
+  /* В карточке товара process-steps идёт в рамке — оставляем колонкой */
+  .product-content .process-steps {
+    display: block;
+    grid-template-columns: none;
+  }
   .product-content .process-step {
     border-right: none;
     border-bottom: 1px solid var(--border);
@@ -1561,6 +1578,8 @@ hr.app-hr { border: none; border-top: 1px solid var(--border); }
   }
   .product-content .process-step:last-child { border-bottom: none; }
   .product-content .process-num { font-size: 28px; margin-bottom: 10px; }
+  .product-content .process-step h3 { font-size: 15px; margin-bottom: 6px; }
+  .product-content .process-step p { font-size: 13px; }
 
   /* ─── WORK TYPES — 2 в ряд (стр. Спецтехники) ───────────── */
   .works-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
