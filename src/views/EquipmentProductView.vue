@@ -9,6 +9,7 @@ import ContactSection from '@/components/sections/ContactSection.vue'
 import AppHr from '@/components/ui/AppHr.vue'
 
 import { equipmentProducts } from '@/data/equipmentProducts'
+import { catalog as equipmentCatalog } from '@/data/equipment'
 
 const route = useRoute()
 const router = useRouter()
@@ -29,10 +30,12 @@ const breadcrumbs = computed(() => {
   ]
 })
 
+// Берём остальные товары из ТОГО ЖЕ каталога главной страницы раздела —
+// чтобы информация в «Смотрите также» всегда совпадала с тем, что на /equipment.
+// Правишь в одном месте (equipment.js → catalog.items) — обновляется и там и тут.
 const relatedItems = computed(() => {
   if (!product.value) return []
-  return Object.values(equipmentProducts)
-    .filter(item => item.slug !== product.value.slug)
+  return equipmentCatalog.items.filter(item => item.slug !== product.value.slug)
 })
 
 const contactData = computed(() => {

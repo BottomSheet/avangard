@@ -1,11 +1,30 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 
 const props = defineProps({
   data: { type: Object, required: true }
 })
 
 const activeThumb = ref(0)
+
+/*
+ * Логика галереи:
+ * - Если в данных задан массив `images` — используем его (рекомендуемый путь).
+ *   Количество миниатюр = количество фото в массиве.
+ * - Иначе используем старый плейсхолдер на основе `photoLabel` + `thumbsCount`.
+ */
+const hasImages = computed(() => Array.isArray(props.data.images) && props.data.images.length > 0)
+
+const thumbs = computed(() => {
+  if (hasImages.value) return props.data.images
+  // Плейсхолдер: массив длиной thumbsCount
+  return Array.from({ length: props.data.thumbsCount || 4 }, (_, i) => i)
+})
+
+const activeImage = computed(() => {
+  if (!hasImages.value) return null
+  return props.data.images[activeThumb.value] || props.data.images[0]
+})
 </script>
 
 <template>
@@ -14,17 +33,31 @@ const activeThumb = ref(0)
       <div class="product-grid">
         <!-- Галерея -->
         <div class="product-gallery">
-          <div class="product-main-img">
-            <div class="product-main-img-label">{{ data.photoLabel }}</div>
+          <div class="product-main-img" :class="{ 'has-image': hasImages }">
+            <img
+              v-if="hasImages"
+              :src="activeImage.src"
+              :alt="activeImage.alt || data.title"
+              class="product-main-img-photo"
+            />
+            <div v-else class="product-main-img-label">{{ data.photoLabel }}</div>
           </div>
-          <div class="product-thumbs">
+
+          <div v-if="thumbs.length > 1" class="product-thumbs">
             <div
-              v-for="i in data.thumbsCount"
+              v-for="(item, i) in thumbs"
               :key="i"
               class="product-thumb"
-              :class="{ active: activeThumb === i - 1 }"
-              @click="activeThumb = i - 1"
-            ></div>
+              :class="{ active: activeThumb === i, 'has-image': hasImages }"
+              @click="activeThumb = i"
+            >
+              <img
+                v-if="hasImages"
+                :src="item.src"
+                :alt="item.alt || ''"
+                class="product-thumb-photo"
+              />
+            </div>
           </div>
         </div>
 

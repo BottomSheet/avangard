@@ -1,8 +1,13 @@
 <script setup>
 defineProps({
-  logoText: { type: String, required: true },
+  // Картинка-логотип (рекомендуемый вариант)
+  logo: { type: String, default: '' },
+  logoAlt: { type: String, default: '' },
+  // Текстовый логотип (используется, если нет картинки)
+  logoText: { type: String, default: '' },
   logoSub: { type: String, default: '' },
-  title: { type: String, required: true },
+  // Информация о клиенте
+  title: { type: String, default: '' },
   description: { type: String, required: true }
 })
 </script>
@@ -10,13 +15,41 @@ defineProps({
 <template>
   <div class="client-card">
     <div class="client-logo">
-      <div class="client-logo-text">
+      <!-- Если есть картинка-логотип — показываем её -->
+      <img
+        v-if="logo"
+        :src="logo"
+        :alt="logoAlt || title || 'Логотип клиента'"
+        class="client-logo-img"
+      />
+      <!-- Иначе fallback на текстовый логотип -->
+      <div v-else class="client-logo-text">
         {{ logoText }}<small v-if="logoSub">{{ logoSub }}</small>
       </div>
     </div>
     <div class="client-info">
-      <h3>{{ title }}</h3>
+      <h3 v-if="title">{{ title }}</h3>
       <p>{{ description }}</p>
     </div>
   </div>
 </template>
+
+<style scoped>
+.client-logo-img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  /* Лёгкая обработка под монохромный стиль сайта.
+     Если хочешь, чтобы лого были цветными — удали следующие 3 строки. */
+  filter: grayscale(100%);
+  opacity: 0.85;
+  transition: filter 0.2s, opacity 0.2s;
+}
+
+.client-card:hover .client-logo-img {
+  filter: grayscale(0);
+  opacity: 1;
+}
+</style>

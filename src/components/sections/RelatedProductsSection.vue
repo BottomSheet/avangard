@@ -197,14 +197,20 @@ watch(() => props.items, async () => {
             class="catalog-card related-card"
             @click="onCardClick"
           >
-            <div class="catalog-img">
-              <div class="catalog-img-label">{{ item.photoLabel }}</div>
+            <div class="catalog-img" :class="{ 'has-image': !!item.image }">
+              <img
+                v-if="item.image"
+                :src="item.image"
+                :alt="item.imageAlt || item.title"
+                class="catalog-img-photo"
+              />
+              <div v-else class="catalog-img-label">{{ item.imgLabel }}</div>
             </div>
             <div class="catalog-body">
               <h3>{{ item.title }}</h3>
-              <p>{{ item.tagline.length > 110 ? item.tagline.slice(0, 110) + '…' : item.tagline }}</p>
-              <div class="catalog-price">
-                {{ item.price.value }} <span>{{ item.price.note }}</span>
+              <p>{{ item.description && item.description.length > 110 ? item.description.slice(0, 110) + '…' : item.description }}</p>
+              <div v-if="item.price" class="catalog-price">
+                {{ item.price }} <span v-if="item.priceNote">{{ item.priceNote }}</span>
               </div>
               <div class="catalog-actions">
                 <span class="btn btn-outline btn-sm">Подробнее</span>

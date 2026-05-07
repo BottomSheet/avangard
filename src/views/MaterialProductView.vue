@@ -9,6 +9,7 @@ import ContactSection from '@/components/sections/ContactSection.vue'
 import AppHr from '@/components/ui/AppHr.vue'
 
 import { materialProducts } from '@/data/materialProducts'
+import { catalog as materialsCatalog } from '@/data/materials'
 
 const route = useRoute()
 const router = useRouter()
@@ -29,11 +30,12 @@ const breadcrumbs = computed(() => {
   ]
 })
 
+// Берём остальные товары из ТОГО ЖЕ каталога главной страницы раздела —
+// чтобы информация в «Смотрите также» всегда совпадала с тем, что на /materials.
+// Правишь в одном месте (materials.js → catalog.items) — обновляется и там и тут.
 const relatedItems = computed(() => {
   if (!product.value) return []
-  // Все материалы кроме текущего
-  return Object.values(materialProducts)
-    .filter(item => item.slug !== product.value.slug)
+  return materialsCatalog.items.filter(item => item.slug !== product.value.slug)
 })
 
 const contactData = computed(() => {

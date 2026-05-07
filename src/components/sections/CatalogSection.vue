@@ -30,11 +30,7 @@ function buildTo(item, basePath) {
         <CatalogCard
           v-for="item in data.items"
           :key="item.slug || item.title"
-          :img-label="item.imgLabel"
-          :title="item.title"
-          :description="item.description"
-          :price="item.price"
-          :price-note="item.priceNote"
+          v-bind="item"
           :cta-label="data.ctaLabel"
           :to="buildTo(item, data.basePath)"
         />
