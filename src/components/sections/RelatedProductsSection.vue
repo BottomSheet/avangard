@@ -208,7 +208,7 @@ watch(() => props.items, async () => {
             </div>
             <div class="catalog-body">
               <h3>{{ item.title }}</h3>
-              <p>{{ item.description && item.description.length > 110 ? item.description.slice(0, 110) + '…' : item.description }}</p>
+              <p>{{ item.description }}</p>
               <div v-if="item.price" class="catalog-price">
                 {{ item.price }} <span v-if="item.priceNote">{{ item.priceNote }}</span>
               </div>

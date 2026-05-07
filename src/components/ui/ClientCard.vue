@@ -3,6 +3,9 @@ defineProps({
   // Картинка-логотип (рекомендуемый вариант)
   logo: { type: String, default: '' },
   logoAlt: { type: String, default: '' },
+  // Если у логотипа много "воздуха" вокруг (как у Владстандарта) — ставим true,
+  // чтобы картинка занимала весь блок без полей.
+  logoFill: { type: Boolean, default: false },
   // Текстовый логотип (используется, если нет картинки)
   logoText: { type: String, default: '' },
   logoSub: { type: String, default: '' },
@@ -14,7 +17,7 @@ defineProps({
 
 <template>
   <div class="client-card">
-    <div class="client-logo">
+    <div class="client-logo" :class="{ 'client-logo--fill': logoFill }">
       <!-- Если есть картинка-логотип — показываем её -->
       <img
         v-if="logo"
@@ -36,16 +39,23 @@ defineProps({
 
 <style scoped>
 .client-logo-img {
-  max-width: 100%;
-  max-height: 100%;
-  width: auto;
-  height: auto;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
   /* Лёгкая обработка под монохромный стиль сайта.
      Если хочешь, чтобы лого были цветными — удали следующие 3 строки. */
   filter: grayscale(100%);
   opacity: 0.85;
   transition: filter 0.2s, opacity 0.2s;
+}
+
+/* Режим для логотипов с большим количеством "воздуха" вокруг (Владстандарт):
+   убираем внутренние отступы и масштабируем картинку, чтобы заполнить блок */
+.client-logo--fill {
+  padding: 0;
+}
+.client-logo--fill .client-logo-img {
+  transform: scale(1.35);
 }
 
 .client-card:hover .client-logo-img {

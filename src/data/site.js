@@ -43,13 +43,6 @@ export const clientsSection = {
   title: 'Нам доверяют\nкрупные компании',
   items: [
     {
-       logo: new URL('@/assets/clients/wb.png', import.meta.url).href,
-      // logoAlt: 'WB Дорожное строительство',
-      logoText: 'WB',
-      title: 'Крупнейший маркетплейс в России',
-      description: 'Активно развивают сеть логистических центров для оптимизации доставки товаров покупателям.'
-    },
-    {
       logo: new URL('@/assets/clients/y.png', import.meta.url).href,
       // logoAlt: 'Яндекс Сельхозкомплекс',
       logoText: 'ЯНДЕКС',
@@ -69,17 +62,10 @@ export const clientsSection = {
       logo: new URL('@/assets/clients/vlads.png', import.meta.url).href,
       // logoAlt: 'ИНВЕСТ КАПИТАЛ',
       logoText: 'Владстандарт',
+      logoFill: true,
       title: 'Один из крупнейших произоводителей колбасных изделий',
       description: 'Предприятие производит продукцию из охлажденного мяса, реализуемую через крупные федеральные сети.'
     },
-    {
-      // logo: new URL('@/assets/clients/logisttra.png', import.meta.url).href,
-      // logoAlt: 'ЛОГИСТТРА Logistics',
-      logoText: 'ЛОГИСТТРА',
-      logoSub: 'LOGISTICS',
-      title: 'Логистический оператор',
-      description: 'Планировка территорий и устройство контейнерных площадок на терминалах.'
-    }
   ]
 }
 

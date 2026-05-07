@@ -101,7 +101,7 @@ const showVariants = computed(() => {
         <h2>{{ labels.applicationsTitle }}</h2>
         <div class="applications-grid">
           <div v-for="app in data.applications" :key="app.num" class="app-item">
-            <div class="app-item-num">— {{ app.num }}</div>
+            <div class="app-item-num">— {{ app.num }} —</div>
             <h3>{{ app.title }}</h3>
             <p>{{ app.text }}</p>
           </div>
