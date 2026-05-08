@@ -1,52 +1,66 @@
-# Фотографии товаров
+# Фотографии товаров и услуг
 
-Структура: для каждого товара отдельная папка по его slug.
+Структура: для каждой карточки (товар, услуга, единица техники) — отдельная папка с её `slug`.
 
 ```
 products/
-  granite/        ← slug товара (см. data/materialProducts.js)
-    1.jpg
-    2.jpg
-    3.jpg
-  limestone/
-    1.jpg
-    ...
+  excavator/        ← spec — спецтехника
+    1.jpg, 2.jpg, ...
+  granite/          ← материалы
+    1.jpg, 2.jpg, ...
+  earthworks/       ← услуги
+    1.jpg, 2.jpg, ...
 ```
 
-## Формат
-- **JPG** или **PNG**, оптимально пропорция **4:3** (например, 1200×900 px)
-- Картинки в карточке каталога и галерее товара кадрируются под 4:3 автоматически (`object-fit: cover`),
-  но если исходник уже в 4:3 — обрезки не будет
-- Размер файла: рекомендуется до 300–500 КБ на фото (для скорости загрузки)
+## Текущее состояние
 
-## Как подключить фото
+| Раздел | Slug-и | Что подключено |
+|---|---|---|
+| **Спецтехника** | `excavator`, `backhoe`, `loader`, `crane` | ✅ Реальные фотографии |
+| **Материалы** | `sand-river`, `sand-quarry`, `granite`, `limestone`, `pgs`, `concrete` | ⚠️ Временные SVG-плейсхолдеры |
+| **Услуги** | `earthworks`, `planning`, `roads`, `overburden`, `drainage`, `demolition`, `utilities`, `landscaping`, `quarry` | ⚠️ Временные SVG-плейсхолдеры |
 
-### 1. Главное фото в карточке каталога (на странице раздела)
+## Как заменить SVG-плейсхолдер на реальное фото
 
-В файле `src/data/materials.js` (или `equipment.js`, `services.js`) у нужного товара добавить поле `image`:
+1. **Найдите фото** на любом из сайтов с лицензией для коммерческого использования:
+   - [pexels.com](https://www.pexels.com) — лицензия Pexels (без атрибуции)
+   - [unsplash.com](https://unsplash.com) — лицензия Unsplash (без атрибуции)
+   - [pixabay.com](https://pixabay.com) — CC0 (без атрибуции)
 
-```js
-{
-  slug: 'granite',
-  image: new URL('@/assets/products/granite/1.jpg', import.meta.url).href,
-  imageAlt: 'Щебень гранитный',  // необязательно, для SEO/доступности
-  title: 'Щебень гранитный',
-  description: '...',
-  ...
-}
-```
+2. **Положите фото** в папку соответствующего slug, например:
+   ```
+   products/granite/1.jpg
+   products/granite/2.jpg
+   products/granite/3.jpg
+   ```
 
-### 2. Галерея на странице товара (главное фото + миниатюры)
+3. **Обновите ссылку** в данных. Найдите файл:
+   - `src/data/materials.js` — для материалов
+   - `src/data/services.js` — для услуг
 
-В файле `src/data/materialProducts.js` (или `equipmentProducts.js`, `serviceProducts.js`) у товара добавить массив `images`:
+   И замените расширение `.svg` на `.jpg` у поля `image`:
+   ```js
+   image: new URL('@/assets/products/granite/1.svg', import.meta.url).href,
+   //                                          ^^^^ заменить на .jpg
+   ```
 
-```js
-images: [
-  { src: new URL('@/assets/products/granite/1.jpg', import.meta.url).href, alt: 'Описание' },
-  { src: new URL('@/assets/products/granite/2.jpg', import.meta.url).href, alt: 'Описание' },
-  { src: new URL('@/assets/products/granite/3.jpg', import.meta.url).href, alt: 'Описание' }
-]
-```
+4. **Для галереи на странице товара** (карусель из нескольких фото) добавьте массив `images` в:
+   - `src/data/materialProducts.js` — для материалов
+   - `src/data/serviceProducts.js` — для услуг
 
-**Сколько фото в массиве — столько миниатюр и появится** (1, 2, 3, 4, 5… любое количество).
-Поля `photoLabel` и `thumbsCount` можно удалить — они нужны только для текстового плейсхолдера.
+   ```js
+   images: [
+     { src: new URL('@/assets/products/granite/1.jpg', import.meta.url).href, alt: 'Щебень гранитный' },
+     { src: new URL('@/assets/products/granite/2.jpg', import.meta.url).href, alt: 'Гранит крупным планом' },
+     { src: new URL('@/assets/products/granite/3.jpg', import.meta.url).href, alt: 'Погрузка щебня' }
+   ],
+   ```
+
+   Сколько фото в массиве — столько миниатюр и появится.
+
+## Формат фото
+
+- **JPG** или **PNG**, оптимальная пропорция **4:3** (например, 1600×1200 px)
+- Изображения автоматически обрезаются под 4:3 в карточках (`object-fit: cover`)
+- Размер файла: до 300–500 КБ на фото (для скорости загрузки)
+- При желании сжать через [tinypng.com](https://tinypng.com) или [squoosh.app](https://squoosh.app)

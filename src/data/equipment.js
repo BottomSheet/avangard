@@ -42,6 +42,8 @@ export const catalog = {
   items: [
     {
       slug: 'excavator',
+      image: new URL('@/assets/products/excavator/1.jpg', import.meta.url).href,
+      imageAlt: 'Экскаватор гусеничный Komatsu PC220',
       imgLabel: 'фото / экскаватор гусеничный',
       title: 'Экскаватор гусеничный - Komatsu PC220',
       description: 'Объём ковша 1,1 м³. Глубина копания до 7 м. Для котлованов, траншей, земляных работ.',
@@ -50,6 +52,8 @@ export const catalog = {
     },
     {
       slug: 'backhoe',
+      image: new URL('@/assets/products/backhoe/1.jpg', import.meta.url).href,
+      imageAlt: 'Экскаватор-погрузчик CASE 695SV',
       imgLabel: 'фото / экскаватор-погрузчик',
       title: 'Экскаватор-погрузчик - CASE 695SV',
       description: 'Ковш 0,25 м³ сзади, фронтальный ковш 1 м³. Универсальная машина для малых объёмов работ.',
@@ -58,6 +62,8 @@ export const catalog = {
     },
     {
       slug: 'loader',
+      image: new URL('@/assets/products/loader/1.jpg', import.meta.url).href,
+      imageAlt: 'Фронтальный погрузчик Lonking LG833N',
       imgLabel: 'фото / фронтальный погрузчик',
       title: 'Фронтальный погрузчик - Lonking LG833N',
       description: 'Грузоподъёмность до 3 т. Ковш 1,8 м³. Погрузка сыпучих материалов, расчистка территорий.',
@@ -66,6 +72,8 @@ export const catalog = {
     },
     {
       slug: 'crane',
+      image: new URL('@/assets/products/crane/1.jpg', import.meta.url).href,
+      imageAlt: 'Автокран Ивановец KC-45717K-3P Air',
       imgLabel: 'фото / автокран',
       title: 'Автокран - Ивановец KC-45717K-3P Air',
       description: 'Грузоподъёмность 25 т, вылет стрелы до 29 м. Монтажные и погрузочно-разгрузочные работы.',

@@ -1613,7 +1613,7 @@ hr.app-hr { border: none; border-top: 1px solid var(--border); }
 }
 
   /* ─── PROCESS — компактно на мобильных ───── */
-  /* По умолчанию — колоночная сетка (для 3-4 шагов выглядит как «лента») */
+  /* По умолчанию — сетка 2 колонки (для 3-4 шагов выглядит как «лента») */
   .process-steps {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -1624,6 +1624,13 @@ hr.app-hr { border: none; border-top: 1px solid var(--border); }
     padding: 18px 12px;
     border-right: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
+    min-width: 0;            /* критично: позволяет тексту переноситься, а не вылезать за грид-ячейку */
+  }
+  /* Принудительный перенос длинных слов, чтобы текст не вылезал за пределы ячейки */
+  .process-step h3,
+  .process-step p {
+    overflow-wrap: anywhere;
+    word-break: break-word;
   }
   /* Сбрасываем правую границу у каждого второго (последнего в строке) */
   .process-step:nth-child(2n) { border-right: none; }
@@ -1637,6 +1644,24 @@ hr.app-hr { border: none; border-top: 1px solid var(--border); }
     grid-column: 1 / -1;
     border-right: none;
     border-bottom: none;
+  }
+
+  /* ─── Если шагов 5 или больше — переключаемся на 1 колонку ─── */
+  /* Это решает проблему наложения текста на мобильных при 5+ шагах */
+  .process-steps:has(.process-step:nth-child(5)) {
+    grid-template-columns: 1fr;
+  }
+  .process-steps:has(.process-step:nth-child(5)) .process-step {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    padding: 16px 14px;
+  }
+  .process-steps:has(.process-step:nth-child(5)) .process-step:last-child {
+    border-bottom: none;
+  }
+  /* Сброс правила для нечётного последнего элемента в режиме 1 колонки */
+  .process-steps:has(.process-step:nth-child(5)) .process-step:last-child:nth-child(odd) {
+    grid-column: auto;
   }
 
   .process-num { font-size: 22px; margin-bottom: 8px; }

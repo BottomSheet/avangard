@@ -21,15 +21,11 @@ export const materialProducts = {
     title: 'Щебень гранитный',
     eyebrow: 'Сыпучие материалы · Артикул 02-Г',
     breadcrumbParent: { to: '/materials', label: 'Сыпучие материалы' },
-    // Плейсхолдеры — используются, пока не добавлены реальные фото в `images`
     photoLabel: 'фото / щебень гранитный, фракция 20–40',
     thumbsCount: 4,
-    // ─── Раскомментируй и подложи реальные фото в src/assets/products/granite/ ───
-    // images: [
-    //   { src: new URL('@/assets/products/granite/1.jpg', import.meta.url).href, alt: 'Щебень гранитный, фракция 20-40' },
-    //   { src: new URL('@/assets/products/granite/2.jpg', import.meta.url).href, alt: 'Гранитный щебень крупным планом' },
-    //   { src: new URL('@/assets/products/granite/3.jpg', import.meta.url).href, alt: 'Погрузка щебня в самосвал' }
-    // ],
+    images: [
+      { src: new URL('@/assets/products/granite/1.svg', import.meta.url).href, alt: 'Щебень гранитный — макро' }
+    ],
     tagline: 'Прочный нерудный материал, получаемый дроблением гранитных скальных пород. Применяется для производства тяжёлых бетонов, при строительстве дорог, мостов, аэродромов и фундаментов высоконагруженных сооружений.',
     quick: [
       { label: 'Прочность', value: 'М1200–М1400' },
@@ -107,6 +103,9 @@ export const materialProducts = {
     breadcrumbParent: { to: '/materials', label: 'Сыпучие материалы' },
     photoLabel: 'фото / щебень известняковый',
     thumbsCount: 4,
+    images: [
+      { src: new URL('@/assets/products/limestone/1.svg', import.meta.url).href, alt: 'Щебень известняковый — макро' }
+    ],
     tagline: 'Экономичный нерудный материал на основе осадочных карбонатных пород. Оптимальное соотношение цены и характеристик для устройства дорог, площадок, благоустройства и оснований под малонагруженные сооружения.',
     quick: [
       { label: 'Прочность', value: 'М600–М800' },
@@ -184,6 +183,9 @@ export const materialProducts = {
     breadcrumbParent: { to: '/materials', label: 'Сыпучие материалы' },
     photoLabel: 'фото / песок речной намывной',
     thumbsCount: 4,
+    images: [
+      { src: new URL('@/assets/products/sand-river/1.svg', import.meta.url).href, alt: 'Песок речной — макро' }
+    ],
     tagline: 'Чистый намывной песок без глинистых примесей и органики. Используется для производства бетонов, кладочных и штукатурных растворов, в дорожном строительстве и производстве ЖБИ.',
     quick: [
       { label: 'Модуль крупности', value: '1,8–2,5' },
@@ -261,6 +263,9 @@ export const materialProducts = {
     breadcrumbParent: { to: '/materials', label: 'Сыпучие материалы' },
     photoLabel: 'фото / песок карьерный',
     thumbsCount: 4,
+    images: [
+      { src: new URL('@/assets/products/sand-quarry/1.svg', import.meta.url).href, alt: 'Песок карьерный — макро' }
+    ],
     tagline: 'Песок открытой добычи для обратной засыпки, планировки участков, подсыпки под фундаменты и дорожных работ. Экономичное решение для большинства подготовительных строительных работ.',
     quick: [
       { label: 'Модуль крупности', value: '1,5–2,0' },
@@ -331,6 +336,9 @@ export const materialProducts = {
     breadcrumbParent: { to: '/materials', label: 'Сыпучие материалы' },
     photoLabel: 'фото / ПГС / ОПГС',
     thumbsCount: 4,
+    images: [
+      { src: new URL('@/assets/products/pgs/1.svg', import.meta.url).href, alt: 'ПГС — макро' }
+    ],
     tagline: 'Песчано-гравийная смесь и обогащённая ПГС — натуральная или обогащённая щебнем смесь. Применяется для устройства оснований дорог, планировки территорий, обратной засыпки крупных объёмов.',
     quick: [
       { label: 'Содержание гравия', value: '10–95%' },
@@ -408,6 +416,9 @@ export const materialProducts = {
     breadcrumbParent: { to: '/materials', label: 'Сыпучие материалы' },
     photoLabel: 'фото / товарный бетон, доставка миксером',
     thumbsCount: 4,
+    images: [
+      { src: new URL('@/assets/products/concrete/1.svg', import.meta.url).href, alt: 'Товарный бетон — макро' }
+    ],
     tagline: 'Готовая бетонная смесь марок М100–М500 с собственного завода. Доставка миксерами объёмом 6–9 м³ в радиусе 70 км. Подача насосом по запросу.',
     quick: [
       { label: 'Марки', value: 'М100–М500' },

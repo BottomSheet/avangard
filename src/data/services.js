@@ -47,6 +47,8 @@ export const catalog = {
   items: [
     {
       slug: 'earthworks',
+      image: new URL('@/assets/products/earthworks/1.svg', import.meta.url).href,
+      imageAlt: 'Земляные работы',
       imgLabel: 'фото / земляные работы',
       title: 'Земляные работы',
       description: 'Разработка котлованов, траншей, выемка грунта под фундаменты. Вывоз и утилизация грунта. Обратная засыпка и трамбовка.',
@@ -55,6 +57,8 @@ export const catalog = {
     },
     {
       slug: 'planning',
+      image: new URL('@/assets/products/planning/1.svg', import.meta.url).href,
+      imageAlt: 'Планировка территорий',
       imgLabel: 'фото / планировка территории',
       title: 'Планировка территорий',
       description: 'Вертикальная планировка участков, выравнивание рельефа, формирование уклонов для отвода воды, рекультивация земель.',
@@ -63,6 +67,8 @@ export const catalog = {
     },
     {
       slug: 'roads',
+      image: new URL('@/assets/products/roads/1.svg', import.meta.url).href,
+      imageAlt: 'Дорожное строительство',
       imgLabel: 'фото / дорожное строительство',
       title: 'Дорожное строительство',
       description: 'Устройство временных и постоянных дорог, подъездных путей, технологических проездов. Отсыпка, уплотнение.',
@@ -71,6 +77,8 @@ export const catalog = {
     },
     {
       slug: 'overburden',
+      image: new URL('@/assets/products/overburden/1.svg', import.meta.url).href,
+      imageAlt: 'Вскрышные работы',
       imgLabel: 'фото / вскрышные работы',
       title: 'Вскрышные работы',
       description: 'Снятие плодородного слоя почвы, вскрыша при добыче полезных ископаемых, зачистка горизонтов карьеров.',
@@ -79,6 +87,8 @@ export const catalog = {
     },
     {
       slug: 'drainage',
+      image: new URL('@/assets/products/drainage/1.svg', import.meta.url).href,
+      imageAlt: 'Дренаж и водоотведение',
       imgLabel: 'фото / дренаж и водоотведение',
       title: 'Дренаж и водоотведение',
       description: 'Устройство дренажных систем, ливневой канализации, водоотводных канав. Защита объектов от подтопления.',
@@ -87,6 +97,8 @@ export const catalog = {
     },
     {
       slug: 'demolition',
+      image: new URL('@/assets/products/demolition/1.svg', import.meta.url).href,
+      imageAlt: 'Демонтажные работы',
       imgLabel: 'фото / демонтажные работы',
       title: 'Демонтажные работы',
       description: 'Снос зданий и сооружений, разборка конструкций, вывоз строительного мусора. Расчистка площадок.',
@@ -95,6 +107,8 @@ export const catalog = {
     },
     {
       slug: 'utilities',
+      image: new URL('@/assets/products/utilities/1.svg', import.meta.url).href,
+      imageAlt: 'Укладка коммуникаций',
       imgLabel: 'фото / укладка коммуникаций',
       title: 'Укладка коммуникаций',
       description: 'Разработка траншей под трубопроводы, кабели, водопровод, канализацию. Засыпка и восстановление покрытия.',
@@ -103,6 +117,8 @@ export const catalog = {
     },
     {
       slug: 'landscaping',
+      image: new URL('@/assets/products/landscaping/1.svg', import.meta.url).href,
+      imageAlt: 'Благоустройство',
       imgLabel: 'фото / благоустройство',
       title: 'Благоустройство',
       description: 'Устройство пешеходных дорожек и площадок, озеленение, завоз и распределение плодородного грунта и торфа.',
@@ -111,6 +127,8 @@ export const catalog = {
     },
     {
       slug: 'quarry',
+      image: new URL('@/assets/products/quarry/1.svg', import.meta.url).href,
+      imageAlt: 'Работы в карьерах',
       imgLabel: 'фото / карьерные работы',
       title: 'Работы в карьерах',
       description: 'Отработка карьеров, вскрыша, добыча нерудных материалов, рекультивация. Опыт на собственных месторождениях.',

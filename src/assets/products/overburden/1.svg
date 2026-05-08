@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#6e5836" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#6e5836" stop-opacity="0.75"/>
+    </linearGradient>
+    <pattern id="dots" width="14" height="14" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="0.8" fill="#241808" opacity="0.18"/>
+      <circle cx="9" cy="9" r="0.8" fill="#241808" opacity="0.18"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="900" fill="url(#bg)"/>
+  <rect width="1200" height="900" fill="url(#dots)"/>
+  <g transform="translate(600,360)" fill="#241808" opacity="0.55"><path d="M-260 90 Q0 60 260 90 L260 100 L-260 100 Z"/><path d="M-260 60 Q0 30 260 60 L260 70 L-260 70 Z" opacity="0.7"/><path d="M-260 30 Q0 0 260 30 L260 40 L-260 40 Z" opacity="0.85"/></g>
+  <g font-family="Inter, Helvetica, Arial, sans-serif" text-anchor="middle">
+    <text x="600" y="560" font-size="44" font-weight="600" fill="#fff" opacity="0.95" letter-spacing="0.5">Вскрышные работы</text>
+    <text x="600" y="600" font-size="17" font-weight="400" fill="#fff" opacity="0.55">плейсхолдер · замените на фото</text>
+  </g>
+</svg>

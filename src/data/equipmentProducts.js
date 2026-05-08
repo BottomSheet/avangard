@@ -11,6 +11,13 @@ export const equipmentProducts = {
     breadcrumbParent: { to: '/equipment', label: 'Аренда спецтехники' },
     photoLabel: 'фото / экскаватор гусеничный',
     thumbsCount: 4,
+    images: [
+      { src: new URL('@/assets/products/excavator/1.jpg', import.meta.url).href, alt: 'Экскаватор гусеничный Komatsu PC220' },
+      { src: new URL('@/assets/products/excavator/2.jpg', import.meta.url).href, alt: 'Экскаватор гусеничный — вид сбоку' },
+      { src: new URL('@/assets/products/excavator/3.jpg', import.meta.url).href, alt: 'Экскаватор гусеничный на объекте' },
+      { src: new URL('@/assets/products/excavator/4.jpg', import.meta.url).href, alt: 'Экскаватор гусеничный — рабочий процесс' },
+      { src: new URL('@/assets/products/excavator/5.jpg', import.meta.url).href, alt: 'Экскаватор гусеничный — общий вид' }
+    ],
     tagline: 'Мощная гусеничная машина для разработки грунтов любой категории. Применяется на крупных земляных работах: котлованы, траншеи, карьерные выработки, разработка скальных пород.',
     quick: [
       { label: 'Объём ковша', value: '1,1 м³' },
@@ -66,6 +73,11 @@ export const equipmentProducts = {
     breadcrumbParent: { to: '/equipment', label: 'Аренда спецтехники' },
     photoLabel: 'фото / экскаватор-погрузчик',
     thumbsCount: 4,
+    images: [
+      { src: new URL('@/assets/products/backhoe/1.jpg', import.meta.url).href, alt: 'Экскаватор-погрузчик CASE 695SV' },
+      { src: new URL('@/assets/products/backhoe/2.jpg', import.meta.url).href, alt: 'Экскаватор-погрузчик — вид с другой стороны' },
+      { src: new URL('@/assets/products/backhoe/3.jpg', import.meta.url).href, alt: 'Экскаватор-погрузчик на объекте' }
+    ],
     tagline: 'Универсальная машина «два в одном»: экскаваторный ковш сзади, погрузочный — спереди. Идеальное решение для небольших и средних объёмов работ, городского строительства, благоустройства.',
     quick: [
       { label: 'Объём заднего ковша', value: '0,25 м³' },
@@ -122,6 +134,12 @@ export const equipmentProducts = {
     breadcrumbParent: { to: '/equipment', label: 'Аренда спецтехники' },
     photoLabel: 'фото / фронтальный погрузчик',
     thumbsCount: 4,
+    images: [
+      { src: new URL('@/assets/products/loader/1.jpg', import.meta.url).href, alt: 'Фронтальный погрузчик Lonking LG833N' },
+      { src: new URL('@/assets/products/loader/2.jpg', import.meta.url).href, alt: 'Фронтальный погрузчик — вид сбоку' },
+      { src: new URL('@/assets/products/loader/3.jpg', import.meta.url).href, alt: 'Фронтальный погрузчик на объекте' },
+      { src: new URL('@/assets/products/loader/4.jpg', import.meta.url).href, alt: 'Фронтальный погрузчик — рабочий процесс' }
+    ],
     tagline: 'Тяжёлая машина для перемещения и погрузки сыпучих и кусковых материалов. Высокая производительность на карьерах, складах, строительных площадках, в логистических центрах.',
     quick: [
       { label: 'Грузоподъёмность', value: 'до 3 т' },
@@ -177,6 +195,10 @@ export const equipmentProducts = {
     breadcrumbParent: { to: '/equipment', label: 'Аренда спецтехники' },
     photoLabel: 'фото / автокран',
     thumbsCount: 4,
+    images: [
+      { src: new URL('@/assets/products/crane/1.jpg', import.meta.url).href, alt: 'Автокран Ивановец KC-45717K-3P Air' },
+      { src: new URL('@/assets/products/crane/2.jpg', import.meta.url).href, alt: 'Автокран — общий вид' }
+    ],
     tagline: 'Грузоподъёмная техника на автомобильном шасси для монтажных и погрузочно-разгрузочных работ. Высокая мобильность, быстрое развёртывание на объекте, работа на высоте до 31 метров.',
     quick: [
       { label: 'Грузоподъёмность', value: '25 т' },

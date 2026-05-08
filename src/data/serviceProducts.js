@@ -11,6 +11,9 @@ export const serviceProducts = {
     breadcrumbParent: { to: '/services', label: 'Подрядные работы' },
     photoLabel: 'фото / земляные работы',
     thumbsCount: 4,
+    images: [
+      { src: new URL('@/assets/products/earthworks/1.svg', import.meta.url).href, alt: 'Земляные работы' }
+    ],
     tagline: 'Полный цикл земляных работ: разработка котлованов и траншей, выемка и вывоз грунта, обратная засыпка и трамбовка. Собственная техника и материалы — выполняем работы любого объёма под ключ.',
     quick: [
       { label: 'Объёмы работ', value: 'до 50 000 м³' },
@@ -87,6 +90,9 @@ export const serviceProducts = {
     breadcrumbParent: { to: '/services', label: 'Подрядные работы' },
     photoLabel: 'фото / планировка территории',
     thumbsCount: 4,
+    images: [
+      { src: new URL('@/assets/products/planning/1.svg', import.meta.url).href, alt: 'Планировка территорий' }
+    ],
     tagline: 'Вертикальная планировка участков, выравнивание рельефа, формирование уклонов для отвода воды, рекультивация земель. Работаем на участках любого размера — от частного домовладения до промышленных площадок.',
     quick: [
       { label: 'Площадь', value: 'от 100 м²' },
@@ -163,6 +169,9 @@ export const serviceProducts = {
     breadcrumbParent: { to: '/services', label: 'Подрядные работы' },
     photoLabel: 'фото / дорожное строительство',
     thumbsCount: 4,
+    images: [
+      { src: new URL('@/assets/products/roads/1.svg', import.meta.url).href, alt: 'Дорожное строительство' }
+    ],
     tagline: 'Устройство временных и постоянных дорог, подъездных путей, технологических проездов. Полный цикл — от земляного полотна до асфальтобетонного покрытия. Работаем по СНиП и СП.',
     quick: [
       { label: 'Длина', value: 'от 50 м' },
@@ -239,6 +248,9 @@ export const serviceProducts = {
     breadcrumbParent: { to: '/services', label: 'Подрядные работы' },
     photoLabel: 'фото / вскрышные работы',
     thumbsCount: 4,
+    images: [
+      { src: new URL('@/assets/products/overburden/1.svg', import.meta.url).href, alt: 'Вскрышные работы' }
+    ],
     tagline: 'Снятие плодородного слоя почвы, вскрыша при добыче полезных ископаемых, зачистка горизонтов карьеров. Большие объёмы — выполняем работы на собственных и сторонних месторождениях.',
     quick: [
       { label: 'Объёмы работ', value: 'до 100 000 м³' },
@@ -315,6 +327,9 @@ export const serviceProducts = {
     breadcrumbParent: { to: '/services', label: 'Подрядные работы' },
     photoLabel: 'фото / дренаж и водоотведение',
     thumbsCount: 4,
+    images: [
+      { src: new URL('@/assets/products/drainage/1.svg', import.meta.url).href, alt: 'Дренаж и водоотведение' }
+    ],
     tagline: 'Устройство дренажных систем, ливневой канализации, водоотводных канав. Защита фундаментов, подвалов, дорог и территорий от подтопления и переувлажнения грунтов.',
     quick: [
       { label: 'Длина системы', value: 'от 20 м' },
@@ -391,6 +406,9 @@ export const serviceProducts = {
     breadcrumbParent: { to: '/services', label: 'Подрядные работы' },
     photoLabel: 'фото / демонтажные работы',
     thumbsCount: 4,
+    images: [
+      { src: new URL('@/assets/products/demolition/1.svg', import.meta.url).href, alt: 'Демонтажные работы' }
+    ],
     tagline: 'Снос зданий и сооружений, разборка конструкций, вывоз строительного мусора. Расчистка площадок под новое строительство. Работаем с объектами любой сложности — от сараев до промышленных корпусов.',
     quick: [
       { label: 'Площадь объекта', value: 'до 10 000 м²' },
@@ -467,6 +485,9 @@ export const serviceProducts = {
     breadcrumbParent: { to: '/services', label: 'Подрядные работы' },
     photoLabel: 'фото / укладка коммуникаций',
     thumbsCount: 4,
+    images: [
+      { src: new URL('@/assets/products/utilities/1.svg', import.meta.url).href, alt: 'Укладка коммуникаций' }
+    ],
     tagline: 'Разработка траншей под трубопроводы, кабели, водопровод, канализацию. Засыпка с послойным уплотнением и восстановление покрытия. Работаем по СНиП с геодезическим контролем.',
     quick: [
       { label: 'Длина участка', value: 'от 50 м' },
@@ -543,6 +564,9 @@ export const serviceProducts = {
     breadcrumbParent: { to: '/services', label: 'Подрядные работы' },
     photoLabel: 'фото / благоустройство территории',
     thumbsCount: 4,
+    images: [
+      { src: new URL('@/assets/products/landscaping/1.svg', import.meta.url).href, alt: 'Благоустройство' }
+    ],
     tagline: 'Устройство пешеходных дорожек и площадок, озеленение, завоз и распределение плодородного грунта и торфа. Создаём комфортную и эстетичную территорию вокруг вашего объекта.',
     quick: [
       { label: 'Площадь', value: 'от 50 м²' },
@@ -619,6 +643,9 @@ export const serviceProducts = {
     breadcrumbParent: { to: '/services', label: 'Подрядные работы' },
     photoLabel: 'фото / работы в карьерах',
     thumbsCount: 4,
+    images: [
+      { src: new URL('@/assets/products/quarry/1.svg', import.meta.url).href, alt: 'Работы в карьерах' }
+    ],
     tagline: 'Отработка карьеров, вскрыша, добыча нерудных материалов, рекультивация. Полный цикл работ на собственных и сторонних месторождениях. Опыт работы с 2015 года.',
     quick: [
       { label: 'Объёмы', value: 'до 500 000 м³/год' },

@@ -55,8 +55,8 @@ export const catalog = {
   items: [
     {
       slug: 'sand-river',
-      // image: new URL('@/assets/products/sand-river/1.jpg', import.meta.url).href,
-      // imageAlt: 'Песок речной',
+      image: new URL('@/assets/products/sand-river/1.svg', import.meta.url).href,
+      imageAlt: 'Песок речной',
       imgLabel: 'фото / песок речной',
       title: 'Песок речной',
       description: 'Чистый намывной песок. Используется в строительстве, при производстве бетона и растворов.',
@@ -65,6 +65,8 @@ export const catalog = {
     },
     {
       slug: 'sand-quarry',
+      image: new URL('@/assets/products/sand-quarry/1.svg', import.meta.url).href,
+      imageAlt: 'Песок карьерный',
       imgLabel: 'фото / песок карьерный',
       title: 'Песок карьерный',
       description: 'Для обратных засыпок, планировки, подсыпки под фундаменты и дорожных работ.',
@@ -73,6 +75,8 @@ export const catalog = {
     },
     {
       slug: 'granite',
+      image: new URL('@/assets/products/granite/1.svg', import.meta.url).href,
+      imageAlt: 'Щебень гранитный',
       imgLabel: 'фото / щебень гранитный',
       title: 'Щебень гранитный',
       description: 'Фракции 5–20, 20–40, 40–70. Для бетонных работ, дорожного строительства, дренажа.',
@@ -81,6 +85,8 @@ export const catalog = {
     },
     {
       slug: 'limestone',
+      image: new URL('@/assets/products/limestone/1.svg', import.meta.url).href,
+      imageAlt: 'Щебень известняковый',
       imgLabel: 'фото / щебень известняковый',
       title: 'Щебень известняковый',
       description: 'Фракции 5–20, 20–40. Для засыпки дорог, подъездных путей, благоустройства.',
@@ -89,6 +95,8 @@ export const catalog = {
     },
     {
       slug: 'pgs',
+      image: new URL('@/assets/products/pgs/1.svg', import.meta.url).href,
+      imageAlt: 'ПГС / ОПГС',
       imgLabel: 'фото / ПГС / ОПГС',
       title: 'ПГС / ОПГС',
       description: 'Песчано-гравийная смесь. Для планировки территорий, устройства оснований под дороги.',
@@ -97,6 +105,8 @@ export const catalog = {
     },
     {
       slug: 'concrete',
+      image: new URL('@/assets/products/concrete/1.svg', import.meta.url).href,
+      imageAlt: 'Товарный бетон',
       imgLabel: 'фото / товарный бетон',
       title: 'Товарный бетон',
       description: 'Готовая бетонная смесь марок М100–М500. Доставка миксерами с собственного завода.',
