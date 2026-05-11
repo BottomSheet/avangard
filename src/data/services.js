@@ -24,7 +24,7 @@ export const whyUs = {
     {
       icon: '◎',
       title: 'Чёткие сроки',
-      description: 'Фиксируем сроки в договоре и соблюдаем их. 800+ сданных объектов — без срывов.'
+      description: 'Фиксируем сроки в договоре и соблюдаем их. 82+ сданных объектов — без срывов.'
     },
     {
       icon: '⊛',
@@ -47,17 +47,17 @@ export const catalog = {
   items: [
     {
       slug: 'earthworks',
-      image: new URL('@/assets/products/earthworks/1.svg', import.meta.url).href,
-      imageAlt: 'Земляные работы',
+      image: new URL('@/assets/products/earthworks/1.jpg', import.meta.url).href,
+      imageAlt: 'Земляные и вскрышные работы',
       imgLabel: 'фото / земляные работы',
-      title: 'Земляные работы',
-      description: 'Разработка котлованов, траншей, выемка грунта под фундаменты. Вывоз и утилизация грунта. Обратная засыпка и трамбовка.',
+      title: 'Земляные и вскрышные работы',
+      description: 'Котлованы, траншеи, вывоз грунта, обратная засыпка. Снятие плодородного слоя, вскрыша на карьерах. Объёмы до 100 000 м³.',
       price: 'договорная',
       priceNote: 'от объёма работ'
     },
     {
       slug: 'planning',
-      image: new URL('@/assets/products/planning/1.svg', import.meta.url).href,
+      image: new URL('@/assets/products/planning/1.jpg', import.meta.url).href,
       imageAlt: 'Планировка территорий',
       imgLabel: 'фото / планировка территории',
       title: 'Планировка территорий',
@@ -67,7 +67,7 @@ export const catalog = {
     },
     {
       slug: 'roads',
-      image: new URL('@/assets/products/roads/1.svg', import.meta.url).href,
+      image: new URL('@/assets/products/roads/1.jpg', import.meta.url).href,
       imageAlt: 'Дорожное строительство',
       imgLabel: 'фото / дорожное строительство',
       title: 'Дорожное строительство',
@@ -76,18 +76,8 @@ export const catalog = {
       priceNote: 'от объёма работ'
     },
     {
-      slug: 'overburden',
-      image: new URL('@/assets/products/overburden/1.svg', import.meta.url).href,
-      imageAlt: 'Вскрышные работы',
-      imgLabel: 'фото / вскрышные работы',
-      title: 'Вскрышные работы',
-      description: 'Снятие плодородного слоя почвы, вскрыша при добыче полезных ископаемых, зачистка горизонтов карьеров.',
-      price: 'договорная',
-      priceNote: 'от объёма работ'
-    },
-    {
       slug: 'drainage',
-      image: new URL('@/assets/products/drainage/1.svg', import.meta.url).href,
+      image: new URL('@/assets/products/drainage/1.jpg', import.meta.url).href,
       imageAlt: 'Дренаж и водоотведение',
       imgLabel: 'фото / дренаж и водоотведение',
       title: 'Дренаж и водоотведение',
@@ -97,7 +87,7 @@ export const catalog = {
     },
     {
       slug: 'demolition',
-      image: new URL('@/assets/products/demolition/1.svg', import.meta.url).href,
+      image: new URL('@/assets/products/demolition/1.jpg', import.meta.url).href,
       imageAlt: 'Демонтажные работы',
       imgLabel: 'фото / демонтажные работы',
       title: 'Демонтажные работы',
@@ -107,7 +97,7 @@ export const catalog = {
     },
     {
       slug: 'utilities',
-      image: new URL('@/assets/products/utilities/1.svg', import.meta.url).href,
+      image: new URL('@/assets/products/utilities/1.jpg', import.meta.url).href,
       imageAlt: 'Укладка коммуникаций',
       imgLabel: 'фото / укладка коммуникаций',
       title: 'Укладка коммуникаций',
@@ -117,7 +107,7 @@ export const catalog = {
     },
     {
       slug: 'landscaping',
-      image: new URL('@/assets/products/landscaping/1.svg', import.meta.url).href,
+      image: new URL('@/assets/products/landscaping/1.jpg', import.meta.url).href,
       imageAlt: 'Благоустройство',
       imgLabel: 'фото / благоустройство',
       title: 'Благоустройство',
@@ -127,11 +117,11 @@ export const catalog = {
     },
     {
       slug: 'quarry',
-      image: new URL('@/assets/products/quarry/1.svg', import.meta.url).href,
+      image: new URL('@/assets/products/quarry/1.jpg', import.meta.url).href,
       imageAlt: 'Работы в карьерах',
       imgLabel: 'фото / карьерные работы',
       title: 'Работы в карьерах',
-      description: 'Отработка карьеров, вскрыша, добыча нерудных материалов, рекультивация. Опыт на собственных месторождениях.',
+      description: 'Отработка карьеров, добыча нерудных материалов, рекультивация. Опыт на собственных месторождениях.',
       price: 'договорная',
       priceNote: 'от объёма работ'
     }
@@ -159,11 +149,16 @@ export const process = {
     },
     {
       num: '04',
-      title: 'Выполнение и приёмка работ',
-      description: 'Выполняем работы в согласованные сроки. По завершении — приёмка с подписанием акта выполненных работ и КС-2/КС-3 для юрлиц.'
+      title: 'Выполнение работ',
+      description: 'Выполняем работы в согласованные сроки. Контроль качества на каждом этапе, регулярные отчёты о ходе работ для заказчика.'
     },
     {
       num: '05',
+      title: 'Приёмка работ',
+      description: 'По завершении проводим приёмку с подписанием акта выполненных работ. Для юрлиц оформляем формы КС-2 и КС-3.'
+    },
+    {
+      num: '06',
       title: 'Оплата',
       description: 'Окончательный расчёт после подписания акта приёмки. Наличные, банковский перевод. Работа с НДС и без.'
     }

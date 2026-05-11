@@ -1,5 +1,7 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, nextTick } from 'vue'
+import { useRouter } from 'vue-router'
+import { contacts } from '@/data/site'
 
 const props = defineProps({
   data: { type: Object, required: true }
@@ -25,6 +27,26 @@ const activeImage = computed(() => {
   if (!hasImages.value) return null
   return props.data.images[activeThumb.value] || props.data.images[0]
 })
+
+const router = useRouter()
+
+/**
+ * Переход к секции контактов.
+ * Важно: в проекте используется createWebHashHistory, поэтому обычный
+ * <a href="#contact"> ломает hash-роутер (URL /#contact вместо /#/... → catch-all → редирект на /).
+ */
+async function goToContact() {
+  const el = document.getElementById('contact')
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    return
+  }
+  await router.push('/')
+  await nextTick()
+  setTimeout(() => {
+    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }, 100)
+}
 </script>
 
 <template>
@@ -88,8 +110,8 @@ const activeImage = computed(() => {
           </div>
 
           <div class="product-actions">
-            <a href="#contact" class="btn btn-dark">Оформить заявку</a>
-            <a href="tel:+70000000000" class="btn btn-outline">Позвонить</a>
+            <a href="#contact" class="btn btn-dark" @click.prevent="goToContact">Оформить заявку</a>
+            <a :href="`tel:${contacts.phoneLink}`" class="btn btn-outline">Позвонить</a>
           </div>
 
           <div class="product-meta-list">

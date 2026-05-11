@@ -55,7 +55,7 @@ export const catalog = {
   items: [
     {
       slug: 'sand-river',
-      image: new URL('@/assets/products/sand-river/1.svg', import.meta.url).href,
+      image: new URL('@/assets/products/sand-river/1.jpg', import.meta.url).href,
       imageAlt: 'Песок речной',
       imgLabel: 'фото / песок речной',
       title: 'Песок речной',
@@ -65,7 +65,7 @@ export const catalog = {
     },
     {
       slug: 'sand-quarry',
-      image: new URL('@/assets/products/sand-quarry/1.svg', import.meta.url).href,
+      image: new URL('@/assets/products/sand-quarry/1.jpg', import.meta.url).href,
       imageAlt: 'Песок карьерный',
       imgLabel: 'фото / песок карьерный',
       title: 'Песок карьерный',
@@ -74,38 +74,38 @@ export const catalog = {
       priceNote: 'с доставкой'
     },
     {
-      slug: 'granite',
-      image: new URL('@/assets/products/granite/1.svg', import.meta.url).href,
-      imageAlt: 'Щебень гранитный',
-      imgLabel: 'фото / щебень гранитный',
-      title: 'Щебень гранитный',
-      description: 'Фракции 5–20, 20–40, 40–70. Для бетонных работ, дорожного строительства, дренажа.',
-      price: 'от 1 900 ₽/м³',
+      slug: 'gravel',
+      image: new URL('@/assets/products/gravel/1.jpg', import.meta.url).href,
+      imageAlt: 'Щебень гравийный',
+      imgLabel: 'фото / щебень гравийный',
+      title: 'Щебень гравийный',
+      description: 'Фракции 3–10, 5–20, 20–40, 40–70. Для бетонных работ, дорожного строительства, дренажа.',
+      price: 'от 1 400 ₽/м³',
       priceNote: 'с доставкой'
     },
     {
       slug: 'limestone',
-      image: new URL('@/assets/products/limestone/1.svg', import.meta.url).href,
+      image: new URL('@/assets/products/limestone/1.jpg', import.meta.url).href,
       imageAlt: 'Щебень известняковый',
       imgLabel: 'фото / щебень известняковый',
       title: 'Щебень известняковый',
-      description: 'Фракции 5–20, 20–40. Для засыпки дорог, подъездных путей, благоустройства.',
+      description: 'Фракции 5–20, 20–40, 40–70. Для засыпки дорог, подъездных путей, благоустройства.',
       price: 'от 1 200 ₽/м³',
       priceNote: 'с доставкой'
     },
     {
       slug: 'pgs',
-      image: new URL('@/assets/products/pgs/1.svg', import.meta.url).href,
+      image: new URL('@/assets/products/pgs/1.jpg', import.meta.url).href,
       imageAlt: 'ПГС / ОПГС',
       imgLabel: 'фото / ПГС / ОПГС',
       title: 'ПГС / ОПГС',
-      description: 'Песчано-гравийная смесь. Для планировки территорий, устройства оснований под дороги.',
+      description: 'Песчано-гравийная смесь природная и обогащённая. Для планировки территорий, устройства оснований под дороги.',
       price: 'от 700 ₽/м³',
       priceNote: 'с доставкой'
     },
     {
       slug: 'concrete',
-      image: new URL('@/assets/products/concrete/1.svg', import.meta.url).href,
+      image: new URL('@/assets/products/concrete/1.jpg', import.meta.url).href,
       imageAlt: 'Товарный бетон',
       imgLabel: 'фото / товарный бетон',
       title: 'Товарный бетон',

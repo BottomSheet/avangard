@@ -1,4 +1,6 @@
 <script setup>
+import { nextTick } from 'vue'
+import { useRouter } from 'vue-router'
 import MultilineHeading from '@/components/ui/MultilineHeading.vue'
 import HeroDirection from '@/components/ui/HeroDirection.vue'
 
@@ -6,6 +8,33 @@ defineProps({
   data: { type: Object, required: true },
   directions: { type: Array, required: true }
 })
+
+const router = useRouter()
+
+/**
+ * Обработчик клика по кнопкам hero.
+ * Важно: в проекте используется createWebHashHistory, поэтому обычный
+ * <a href="#contact"> ломает hash-роутер (URL /#contact вместо /#/ → catch-all → редирект на /).
+ * Здесь: если секция #contact / #about есть на текущей странице — плавный скролл к ней;
+ * если нет (мы на другой странице) — переход на главную и потом скролл.
+ */
+async function handleAction(href) {
+  // href вида '#contact', '#about'
+  const id = href.startsWith('#') ? href.slice(1) : href
+
+  const el = document.getElementById(id)
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    return
+  }
+
+  // секции нет на этой странице — идём на главную, ждём рендер, скроллим
+  await router.push('/')
+  await nextTick()
+  setTimeout(() => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }, 100)
+}
 </script>
 
 <template>
@@ -23,6 +52,7 @@ defineProps({
           :key="action.label"
           :href="action.href"
           class="btn btn-outline-white"
+          @click.prevent="handleAction(action.href)"
         >
           {{ action.label }}
         </a>

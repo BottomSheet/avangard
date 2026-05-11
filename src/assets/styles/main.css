@@ -1612,73 +1612,63 @@ hr.app-hr { border: none; border-top: 1px solid var(--border); }
   justify-content: center;
 }
 
-  /* ─── PROCESS — компактно на мобильных ───── */
-  /* По умолчанию — сетка 2 колонки (для 3-4 шагов выглядит как «лента») */
+  /* ─── PROCESS — карточки 2 в ряд на мобильных ───── */
+  /* ВАЖНО: переопределяем grid-auto-flow и grid-auto-columns из базовых стилей
+     (на десктопе там column + 1fr, что заставляет браузер делать N колонок по числу
+     детей — на узком экране это превращается в 6 узких сплющенных столбиков).
+     Здесь явно сбрасываем на row и задаём 2 колонки. */
   .process-steps {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0;
+    grid-auto-flow: row;
+    grid-auto-columns: auto;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
   }
 
   .process-step {
-    padding: 18px 12px;
-    border-right: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
+    padding: 16px 12px;
+    /* каждая карточка — отдельная, с рамкой и скруглением */
+    border: 1px solid var(--border);
+    border-right: 1px solid var(--border);  /* перебиваем base, где border-right отдельно */
+    border-radius: 6px;
+    background: var(--bg, #fff);
     min-width: 0;            /* критично: позволяет тексту переноситься, а не вылезать за грид-ячейку */
   }
+  .process-step:last-child { border-right: 1px solid var(--border); } /* перебиваем base */
+
   /* Принудительный перенос длинных слов, чтобы текст не вылезал за пределы ячейки */
   .process-step h3,
   .process-step p {
     overflow-wrap: anywhere;
     word-break: break-word;
+    hyphens: auto;
   }
-  /* Сбрасываем правую границу у каждого второго (последнего в строке) */
-  .process-step:nth-child(2n) { border-right: none; }
-  /* Убираем нижнюю границу у последней строки — у двух последних элементов */
-  .process-step:nth-last-child(-n+2):nth-child(odd),
-  .process-step:nth-last-child(1) {
-    border-bottom: none;
-  }
-  /* Если шагов нечётное число — последний элемент занимает всю ширину */
+  /* Если шагов нечётное число — последняя карточка занимает всю ширину */
   .process-step:last-child:nth-child(odd) {
     grid-column: 1 / -1;
-    border-right: none;
-    border-bottom: none;
   }
 
-  /* ─── Если шагов 5 или больше — переключаемся на 1 колонку ─── */
-  /* Это решает проблему наложения текста на мобильных при 5+ шагах */
-  .process-steps:has(.process-step:nth-child(5)) {
-    grid-template-columns: 1fr;
-  }
-  .process-steps:has(.process-step:nth-child(5)) .process-step {
-    border-right: none;
-    border-bottom: 1px solid var(--border);
-    padding: 16px 14px;
-  }
-  .process-steps:has(.process-step:nth-child(5)) .process-step:last-child {
-    border-bottom: none;
-  }
-  /* Сброс правила для нечётного последнего элемента в режиме 1 колонки */
-  .process-steps:has(.process-step:nth-child(5)) .process-step:last-child:nth-child(odd) {
-    grid-column: auto;
-  }
-
-  .process-num { font-size: 22px; margin-bottom: 8px; }
-  .process-step h3 { font-size: 12.5px; margin-bottom: 4px; line-height: 1.25; }
-  .process-step p { font-size: 11.5px; line-height: 1.4; }
+  .process-num { font-size: 22px; margin-bottom: 6px; }
+  .process-step h3 { font-size: 13px; margin-bottom: 5px; line-height: 1.25; }
+  .process-step p { font-size: 12px; line-height: 1.4; }
 
   /* В карточке товара process-steps идёт в рамке — оставляем колонкой */
   .product-content .process-steps {
     display: block;
     grid-template-columns: none;
+    gap: 0;
   }
   .product-content .process-step {
-    border-right: none;
+    border: none;
     border-bottom: 1px solid var(--border);
+    border-radius: 0;
+    background: transparent;
     padding: 22px 18px;
   }
-  .product-content .process-step:last-child { border-bottom: none; }
+  .product-content .process-step:last-child {
+    border-bottom: none;
+    border-right: none;
+  }
   .product-content .process-num { font-size: 28px; margin-bottom: 10px; }
   .product-content .process-step h3 { font-size: 15px; margin-bottom: 6px; }
   .product-content .process-step p { font-size: 13px; }

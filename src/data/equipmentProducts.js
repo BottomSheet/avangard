@@ -13,10 +13,10 @@ export const equipmentProducts = {
     thumbsCount: 4,
     images: [
       { src: new URL('@/assets/products/excavator/1.jpg', import.meta.url).href, alt: 'Экскаватор гусеничный Komatsu PC220' },
+      { src: new URL('@/assets/products/excavator/5.jpg', import.meta.url).href, alt: 'Экскаватор гусеничный — общий вид' },
+      { src: new URL('@/assets/products/excavator/4.jpg', import.meta.url).href, alt: 'Экскаватор гусеничный — рабочий процесс' },
       { src: new URL('@/assets/products/excavator/2.jpg', import.meta.url).href, alt: 'Экскаватор гусеничный — вид сбоку' },
       { src: new URL('@/assets/products/excavator/3.jpg', import.meta.url).href, alt: 'Экскаватор гусеничный на объекте' },
-      { src: new URL('@/assets/products/excavator/4.jpg', import.meta.url).href, alt: 'Экскаватор гусеничный — рабочий процесс' },
-      { src: new URL('@/assets/products/excavator/5.jpg', import.meta.url).href, alt: 'Экскаватор гусеничный — общий вид' }
     ],
     tagline: 'Мощная гусеничная машина для разработки грунтов любой категории. Применяется на крупных земляных работах: котлованы, траншеи, карьерные выработки, разработка скальных пород.',
     quick: [
