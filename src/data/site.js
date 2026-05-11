@@ -84,9 +84,7 @@ export const footerNav = {
   info: {
     title: 'Информация',
     links: [
-      { to: '#', label: 'Сертификаты' },
       { to: '#', label: 'Реквизиты' },
-      { to: '#', label: 'Договор-оферта' },
       { to: '#', label: 'Политика конфиденциальности' }
     ]
   },
