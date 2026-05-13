@@ -6,7 +6,7 @@ defineProps({
   subtitle: { type: String, default: '' },
   successText: {
     type: String,
-    default: 'Мы свяжемся с вами в течение часа'
+    default: 'Спасибо, что оставили заявку! Свяжемся с вами в течение 1–2 часов.'
   }
 })
 
@@ -150,7 +150,6 @@ function submit() {
     </template>
 
     <div v-else class="form-success">
-      <div class="form-success-icon">✓</div>
       <h4>Заявка отправлена</h4>
       <p>{{ successText }}</p>
     </div>

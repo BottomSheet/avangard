@@ -42,7 +42,13 @@ export const catalog = {
   items: [
     {
       slug: 'excavator',
-      image: new URL('@/assets/products/excavator/1.jpg', import.meta.url).href,
+      images: [
+        { src: new URL('@/assets/products/excavator/1.jpg', import.meta.url).href, alt: 'Экскаватор гусеничный Komatsu PC220' },
+        { src: new URL('@/assets/products/excavator/5.jpg', import.meta.url).href, alt: 'Экскаватор гусеничный — общий вид' },
+        { src: new URL('@/assets/products/excavator/4.jpg', import.meta.url).href, alt: 'Экскаватор гусеничный — рабочий процесс' },
+        { src: new URL('@/assets/products/excavator/2.jpg', import.meta.url).href, alt: 'Экскаватор гусеничный — вид сбоку' },
+        { src: new URL('@/assets/products/excavator/3.jpg', import.meta.url).href, alt: 'Экскаватор гусеничный на объекте' }
+      ],
       imageAlt: 'Экскаватор гусеничный Komatsu PC220',
       imgLabel: 'фото / экскаватор гусеничный',
       title: 'Экскаватор гусеничный - Komatsu PC220',
@@ -52,7 +58,11 @@ export const catalog = {
     },
     {
       slug: 'backhoe',
-      image: new URL('@/assets/products/backhoe/1.jpg', import.meta.url).href,
+      images: [
+        { src: new URL('@/assets/products/backhoe/1.jpg', import.meta.url).href, alt: 'Экскаватор-погрузчик CASE 695SV' },
+        { src: new URL('@/assets/products/backhoe/2.jpg', import.meta.url).href, alt: 'Экскаватор-погрузчик — вид с другой стороны' },
+        { src: new URL('@/assets/products/backhoe/3.jpg', import.meta.url).href, alt: 'Экскаватор-погрузчик на объекте' }
+      ],
       imageAlt: 'Экскаватор-погрузчик CASE 695SV',
       imgLabel: 'фото / экскаватор-погрузчик',
       title: 'Экскаватор-погрузчик - CASE 695SV',
@@ -62,7 +72,12 @@ export const catalog = {
     },
     {
       slug: 'loader',
-      image: new URL('@/assets/products/loader/1.jpg', import.meta.url).href,
+      images: [
+        { src: new URL('@/assets/products/loader/1.jpg', import.meta.url).href, alt: 'Фронтальный погрузчик Lonking LG833N' },
+        { src: new URL('@/assets/products/loader/2.jpg', import.meta.url).href, alt: 'Фронтальный погрузчик — вид сбоку' },
+        { src: new URL('@/assets/products/loader/3.jpg', import.meta.url).href, alt: 'Фронтальный погрузчик на объекте' },
+        { src: new URL('@/assets/products/loader/4.jpg', import.meta.url).href, alt: 'Фронтальный погрузчик — рабочий процесс' }
+      ],
       imageAlt: 'Фронтальный погрузчик Lonking LG833N',
       imgLabel: 'фото / фронтальный погрузчик',
       title: 'Фронтальный погрузчик - Lonking LG833N',
@@ -72,7 +87,10 @@ export const catalog = {
     },
     {
       slug: 'crane',
-      image: new URL('@/assets/products/crane/1.jpg', import.meta.url).href,
+      images: [
+        { src: new URL('@/assets/products/crane/1.jpg', import.meta.url).href, alt: 'Автокран Ивановец KC-45717K-3P Air' },
+        { src: new URL('@/assets/products/crane/2.jpg', import.meta.url).href, alt: 'Автокран — общий вид' }
+      ],
       imageAlt: 'Автокран Ивановец KC-45717K-3P Air',
       imgLabel: 'фото / автокран',
       title: 'Автокран - Ивановец KC-45717K-3P Air',
