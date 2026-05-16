@@ -258,9 +258,18 @@ p { font-size: 16px; line-height: 1.7; color: var(--mid); font-weight: 400; }
 }
 
 /* ─── PAGE HERO (inner pages) ─────────────────────── */
+/*
+ * Все три Hero (Материалы, Спецтехника, Услуги) — одной высоты.
+ * Высота подобрана под самый «высокий» заголовок (3-строчный) с описанием
+ * в 2 строки + eyebrow. Контент центрирован по вертикали — симметричные
+ * визуальные отступы сверху и снизу.
+ */
 .page-hero {
-  min-height: 52vh; display: flex; align-items: flex-end;
-  padding-top: var(--nav-h);
+  min-height: 560px;
+  display: flex; align-items: center;
+  /* Симметрия: верхний и нижний паддинги равны.
+     Дополнительные --nav-h сверху чтобы контент не уходил под фиксированную навигацию. */
+  padding: calc(var(--nav-h) + 80px) 0 80px;
   background: var(--fg); color: var(--bg);
   position: relative; overflow: hidden;
 }
@@ -268,18 +277,98 @@ p { font-size: 16px; line-height: 1.7; color: var(--mid); font-weight: 400; }
 .page-hero-bg {
   position: absolute; inset: 0;
   background: linear-gradient(160deg, #1e1e1c 0%, #0a0a09 100%);
+  z-index: 0;
 }
 
-.page-hero-pattern {
-  position: absolute; inset: 0; opacity: 0.04;
-  background-image: repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(255,255,255,0.6) 39px, rgba(255,255,255,0.6) 40px),
-                    repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(255,255,255,0.6) 39px, rgba(255,255,255,0.6) 40px);
+/*
+ * Слой картинки Hero (или декоративной заглушки).
+ * Эффект: при загрузке — плавная «фокусировка» (блюр уходит, opacity нарастает),
+ * далее — медленный «полёт камеры» (Ken Burns drift) с zoom и смещением,
+ * плюс параллакс на курсор/гироскоп (через CSS-переменные из JS).
+ * Всё на transform/filter/opacity — GPU-композиция, без layout-thrashing.
+ */
+.page-hero-media {
+  position: absolute; inset: 0;
+  overflow: hidden;
+  z-index: 1;
+  --hero-parallax-x: 0px;
+  --hero-parallax-y: 0px;
+  opacity: 0;
+  animation: pageHeroReveal 2200ms cubic-bezier(0.22, 0.61, 0.36, 1) 60ms forwards;
+  will-change: opacity;
+}
+
+.page-hero-img,
+.page-hero-media.is-placeholder::before {
+  position: absolute;
+  /* Слой больше viewport — чтобы при параллакс-смещении не было пустых краёв */
+  inset: -24px;
+  width: calc(100% + 48px);
+  height: calc(100% + 48px);
+}
+
+.page-hero-img {
+  object-fit: cover;
+  /* Стартовое состояние: сильный блюр + увеличенный масштаб.
+     Анимация pageHeroFocus уберёт блюр, pageHeroDrift подхватит scale в drift-цикл. */
+  transform:
+    translate3d(var(--hero-parallax-x), var(--hero-parallax-y), 0)
+    scale(1.22);
+  filter: blur(28px) brightness(0.85);
+  animation:
+    pageHeroFocus 2800ms cubic-bezier(0.22, 0.61, 0.36, 1) 60ms forwards,
+    pageHeroDrift 36s ease-in-out 2900ms infinite;
+  will-change: transform, filter;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Декоративная заглушка — пока пользователь не положил реальное фото.
+   Намеренно яркая и заметная, чтобы видно: «здесь нужна картинка». */
+.page-hero-media.is-placeholder {
+  background:
+    radial-gradient(60% 55% at 25% 30%, rgba(120, 180, 255, 0.35), transparent 65%),
+    radial-gradient(60% 55% at 80% 75%, rgba(255, 140, 80, 0.30), transparent 60%),
+    linear-gradient(135deg, #4a4a42 0%, #2a2a26 50%, #14140f 100%);
+}
+
+.page-hero-media.is-placeholder::before {
+  content: 'HERO IMAGE PLACEHOLDER';
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font);
+  font-size: 18px;
+  letter-spacing: 0.2em;
+  color: rgba(255,255,255,0.55);
+  text-transform: uppercase;
+  font-weight: 500;
+  transform:
+    translate3d(var(--hero-parallax-x), var(--hero-parallax-y), 0)
+    scale(1.22);
+  filter: blur(28px) brightness(0.85);
+  animation:
+    pageHeroFocus 2800ms cubic-bezier(0.22, 0.61, 0.36, 1) 60ms forwards,
+    pageHeroDrift 36s ease-in-out 2900ms infinite;
+  will-change: transform, filter;
+}
+
+/* Затемняющий градиент для читабельности текста поверх реальной картинки.
+   На заглушке скрыт — заглушка и так тёмная. */
+.page-hero-scrim {
+  position: absolute; inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.page-hero.has-image .page-hero-scrim {
+  background:
+    linear-gradient(180deg, rgba(10,10,9,0.55) 0%, rgba(10,10,9,0.25) 35%, rgba(10,10,9,0.75) 100%),
+    linear-gradient(90deg, rgba(10,10,9,0.45) 0%, rgba(10,10,9,0) 60%);
 }
 
 .page-hero-content {
-  position: relative; z-index: 2;
+  position: relative; z-index: 3;
   max-width: var(--max); margin: 0 auto; padding: 0 40px;
-  padding-bottom: 96px; width: 100%;
+  width: 100%;
 }
 
 .page-hero .hero-eyebrow {
@@ -289,6 +378,53 @@ p { font-size: 16px; line-height: 1.7; color: var(--mid); font-weight: 400; }
 
 .page-hero h1 { color: var(--bg); margin-bottom: 16px; max-width: 680px; }
 .page-hero p { color: rgba(255,255,255,0.7); max-width: 480px; margin-top: 20px; font-size: 17px; }
+
+/*
+ * Анимации Hero:
+ *   pageHeroReveal — opacity-fade слоя media.
+ *   pageHeroFocus  — «фокусировка»: блюр 28→0, brightness 0.85→1.
+ *   pageHeroDrift  — Ken Burns: одновременно zoom и смещение, ощущение
+ *                    плавно летящей камеры по сцене.
+ */
+@keyframes pageHeroReveal {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes pageHeroFocus {
+  from { filter: blur(28px) brightness(0.85); }
+  to   { filter: blur(0) brightness(1); }
+}
+
+/* Drift: scale + translate одновременно. Стартовое состояние scale(1.22) задано
+   на самом элементе, чтобы совпасть с финалом фокусировки — без прыжков. */
+@keyframes pageHeroDrift {
+  0% {
+    transform: translate3d(var(--hero-parallax-x), var(--hero-parallax-y), 0) scale(1.22) translate(0%, 0%);
+  }
+  33% {
+    transform: translate3d(var(--hero-parallax-x), var(--hero-parallax-y), 0) scale(1.12) translate(1.2%, -0.8%);
+  }
+  66% {
+    transform: translate3d(var(--hero-parallax-x), var(--hero-parallax-y), 0) scale(1.16) translate(-1.4%, 0.6%);
+  }
+  100% {
+    transform: translate3d(var(--hero-parallax-x), var(--hero-parallax-y), 0) scale(1.10) translate(0.6%, 1.2%);
+  }
+}
+
+/* Уважаем системную настройку «уменьшить движение» —
+   моментально показываем картинку без блюра и без зацикленных анимаций. */
+@media (prefers-reduced-motion: reduce) {
+  .page-hero-media,
+  .page-hero-img,
+  .page-hero-media.is-placeholder::before {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+}
 
 /* ─── ABOUT / INFO CARDS ──────────────────────────── */
 .about-grid {
@@ -1209,7 +1345,8 @@ hr.app-hr { border: none; border-top: 1px solid var(--border); }
   .wrap { padding: 0 24px; }
   section { padding: 64px 0; }
   .nav-inner { padding: 0 24px; }
-  .hero-content, .page-hero-content { padding: 0 24px; padding-bottom: 64px; }
+  .hero-content { padding: 0 24px; padding-bottom: 64px; }
+  .page-hero-content { padding: 0 24px; }
   .footer-inner { padding: 0 24px; }
   .nav-links {
     display: none; flex-direction: column;
@@ -1507,11 +1644,49 @@ hr.app-hr { border: none; border-top: 1px solid var(--border); }
   .hero-dir-sub { font-size: 13px; }
 
   /* ─── PAGE HERO (Материалы / Спецтехника / Услуги) ─────────── */
-  .page-hero { min-height: 38vh; }
-  .page-hero-content { padding-bottom: 36px; }
+  /* На мобильных: фикс. высота под самый «высокий» 3-строчный заголовок;
+     симметричные верх/низ — контент центрирован. */
+  .page-hero {
+    min-height: 440px;
+    padding: calc(var(--nav-h) + 40px) 0 40px;
+  }
   .page-hero h1 { font-size: 32px; margin-bottom: 10px; }
   .page-hero p { font-size: 14px; margin-top: 12px; }
   .page-hero .hero-eyebrow { margin-bottom: 16px; }
+
+  /* На мобильных blur >20px ощутимо нагружает GPU — снижаем до 18px
+     (но всё ещё хорошо заметно), уменьшаем амплитуду drift. */
+  .page-hero-img,
+  .page-hero-media.is-placeholder::before {
+    transform:
+      translate3d(var(--hero-parallax-x), var(--hero-parallax-y), 0)
+      scale(1.16);
+    filter: blur(18px) brightness(0.85);
+    animation:
+      pageHeroFocusMobile 2500ms cubic-bezier(0.22, 0.61, 0.36, 1) 60ms forwards,
+      pageHeroDriftMobile 32s ease-in-out 2600ms infinite;
+  }
+
+  @keyframes pageHeroFocusMobile {
+    from { filter: blur(18px) brightness(0.85); }
+    to   { filter: blur(0) brightness(1); }
+  }
+
+  /* Drift меньшей амплитуды для мобильных — деликатнее, без укачивания */
+  @keyframes pageHeroDriftMobile {
+    0% {
+      transform: translate3d(var(--hero-parallax-x), var(--hero-parallax-y), 0) scale(1.16) translate(0%, 0%);
+    }
+    33% {
+      transform: translate3d(var(--hero-parallax-x), var(--hero-parallax-y), 0) scale(1.08) translate(0.8%, -0.5%);
+    }
+    66% {
+      transform: translate3d(var(--hero-parallax-x), var(--hero-parallax-y), 0) scale(1.12) translate(-0.9%, 0.4%);
+    }
+    100% {
+      transform: translate3d(var(--hero-parallax-x), var(--hero-parallax-y), 0) scale(1.06) translate(0.4%, 0.8%);
+    }
+  }
 
   /* ─── ABOUT (Главная) — статистика 2×2 компактно ──────────── */
   .about-grid { grid-template-columns: 1fr; gap: 32px; }

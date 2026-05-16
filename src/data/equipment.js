@@ -4,7 +4,9 @@
 
 export const pageHero = {
   title: 'Аренда\nспецтехники',
-  description: '23+ единиц собственной техники. С оператором, готовы к выезду в течение 24 часов.'
+  description: '23+ единиц собственной техники. С оператором, готовы к выезду в течение 24 часов.',
+  image: new URL('@/assets/products/excavator/1.jpg', import.meta.url).href,
+  imageAlt: 'Аренда спецтехники'
 }
 
 export const whyUs = {
