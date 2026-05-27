@@ -265,7 +265,7 @@ p { font-size: 16px; line-height: 1.7; color: var(--mid); font-weight: 400; }
  * визуальные отступы сверху и снизу.
  */
 .page-hero {
-  min-height: 560px;
+  height: 580px;
   display: flex; align-items: center;
   /* Симметрия: верхний и нижний паддинги равны.
      Дополнительные --nav-h сверху чтобы контент не уходил под фиксированную навигацию. */
@@ -313,11 +313,11 @@ p { font-size: 16px; line-height: 1.7; color: var(--mid); font-weight: 400; }
      Анимация pageHeroFocus уберёт блюр, pageHeroDrift подхватит scale в drift-цикл. */
   transform:
     translate3d(var(--hero-parallax-x), var(--hero-parallax-y), 0)
-    scale(1.22);
+    scale(1.1);
   filter: blur(28px) brightness(0.85);
   animation:
-    pageHeroFocus 2800ms cubic-bezier(0.22, 0.61, 0.36, 1) 60ms forwards,
-    pageHeroDrift 36s ease-in-out 2900ms infinite;
+    pageHeroFocus 3500ms cubic-bezier(0.22, 0.61, 0.36, 1) 60ms forwards,
+    pageHeroDrift 36s ease-in-out 3500ms infinite;
   will-change: transform, filter;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
@@ -343,11 +343,11 @@ p { font-size: 16px; line-height: 1.7; color: var(--mid); font-weight: 400; }
   font-weight: 500;
   transform:
     translate3d(var(--hero-parallax-x), var(--hero-parallax-y), 0)
-    scale(1.22);
+    scale(1.1);
   filter: blur(28px) brightness(0.85);
   animation:
-    pageHeroFocus 2800ms cubic-bezier(0.22, 0.61, 0.36, 1) 60ms forwards,
-    pageHeroDrift 36s ease-in-out 2900ms infinite;
+    pageHeroFocus 3500ms cubic-bezier(0.22, 0.61, 0.36, 1) 60ms forwards,
+    pageHeroDrift 36s ease-in-out 3500ms infinite;
   will-change: transform, filter;
 }
 

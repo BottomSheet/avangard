@@ -5,7 +5,7 @@
 export const pageHero = {
   title: 'Подрядные\nи строительные\nработы',
   description: 'Выполняем весь спектр земляных, дорожных и строительных работ. Собственная техника и материалы — под ключ.',
-  image: new URL('@/assets/products/earthworks/1.jpg', import.meta.url).href,
+  image: new URL('@/assets/hero/services-hero.jpg', import.meta.url).href,
   imageAlt: 'Подрядные и строительные работы'
 }
 
@@ -49,7 +49,7 @@ export const catalog = {
   items: [
     {
       slug: 'earthworks',
-      image: new URL('@/assets/products/earthworks/1.jpg', import.meta.url).href,
+      image: new URL('@/assets/hero/services-hero.jpg', import.meta.url).href,
       imageAlt: 'Земляные и вскрышные работы',
       imgLabel: 'фото / земляные работы',
       title: 'Земляные и вскрышные работы',

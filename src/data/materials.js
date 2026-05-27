@@ -5,7 +5,7 @@
 export const pageHero = {
   title: 'Сыпучие\nстроительные\nматериалы',
   description: 'Собственная добыча на трёх карьерах. Доставка по всему региону собственным транспортом.',
-  image: new URL('@/assets/products/sand-river/1.jpg', import.meta.url).href,
+  image: new URL('@/assets/hero/materials-hero.jpg', import.meta.url).href,
   imageAlt: 'Сыпучие строительные материалы'
 }
 
@@ -62,7 +62,7 @@ export const catalog = {
   items: [
     {
       slug: 'sand-river',
-      image: new URL('@/assets/products/sand-river/1.jpg', import.meta.url).href,
+      image: new URL('@/assets/hero/materials-hero.jpg', import.meta.url).href,
       imageAlt: 'Песок речной',
       imgLabel: 'фото / песок речной',
       title: 'Песок речной',

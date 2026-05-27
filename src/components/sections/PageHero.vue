@@ -111,6 +111,7 @@ onBeforeUnmount(() => {
         class="page-hero-img"
         loading="eager"
         decoding="async"
+        fetchpriority="high"
       />
     </div>
 
