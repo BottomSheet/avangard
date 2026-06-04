@@ -265,7 +265,7 @@ p { font-size: 16px; line-height: 1.7; color: var(--mid); font-weight: 400; }
  * визуальные отступы сверху и снизу.
  */
 .page-hero {
-  height: 580px;
+  height: 1080px;
   display: flex; align-items: center;
   /* Симметрия: верхний и нижний паддинги равны.
      Дополнительные --nav-h сверху чтобы контент не уходил под фиксированную навигацию. */
@@ -317,7 +317,7 @@ p { font-size: 16px; line-height: 1.7; color: var(--mid); font-weight: 400; }
   filter: blur(28px) brightness(0.85);
   animation:
     pageHeroFocus 3500ms cubic-bezier(0.22, 0.61, 0.36, 1) 60ms forwards,
-    pageHeroDrift 36s ease-in-out 3500ms infinite;
+    pageHeroDrift 12s ease-in-out 3500ms infinite;
   will-change: transform, filter;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
@@ -1647,6 +1647,7 @@ hr.app-hr { border: none; border-top: 1px solid var(--border); }
   /* На мобильных: фикс. высота под самый «высокий» 3-строчный заголовок;
      симметричные верх/низ — контент центрирован. */
   .page-hero {
+    height: auto;          /* ← сбрасываем фиксированную высоту с десктопа */
     min-height: 440px;
     padding: calc(var(--nav-h) + 40px) 0 40px;
   }
@@ -1660,7 +1661,7 @@ hr.app-hr { border: none; border-top: 1px solid var(--border); }
   .page-hero-media.is-placeholder::before {
     transform:
       translate3d(var(--hero-parallax-x), var(--hero-parallax-y), 0)
-      scale(1.16);
+      scale(1.1);
     filter: blur(18px) brightness(0.85);
     animation:
       pageHeroFocusMobile 2500ms cubic-bezier(0.22, 0.61, 0.36, 1) 60ms forwards,
