@@ -1686,7 +1686,7 @@ hr.app-hr { border: none; border-top: 1px solid var(--border); }
      симметричные верх/низ — контент центрирован. */
   .page-hero {
     height: auto;          /* ← сбрасываем фиксированную высоту с десктопа */
-    min-height: 440px;
+    min-height: 500px;
     padding: calc(var(--nav-h) + 40px) 0 40px;
   }
   .page-hero h1 { font-size: 32px; margin-bottom: 10px; }
