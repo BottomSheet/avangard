@@ -63,7 +63,7 @@ export const catalog = {
   items: [
     {
       slug: 'sand-river',
-      image: new URL('@/assets/hero/materials-hero.jpg', import.meta.url).href,
+      image: new URL('@/assets/products/sand-river/1.jpg', import.meta.url).href,
       imageAlt: 'Песок речной',
       imgLabel: 'фото / песок речной',
       title: 'Песок речной',
