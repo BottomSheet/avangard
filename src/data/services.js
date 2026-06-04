@@ -6,6 +6,7 @@ export const pageHero = {
   title: 'Подрядные\nи строительные\nработы',
   description: 'Выполняем весь спектр земляных, дорожных и строительных работ. Собственная техника и материалы — под ключ.',
   image: new URL('@/assets/hero/services-hero.jpg', import.meta.url).href,
+  imageMobile: new URL('@/assets/hero/services-hero-mobile.jpg', import.meta.url).href,
   imageAlt: 'Подрядные и строительные работы'
 }
 

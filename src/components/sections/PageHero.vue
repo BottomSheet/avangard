@@ -4,9 +4,11 @@ import MultilineHeading from '@/components/ui/MultilineHeading.vue'
 
 defineProps({
   data: { type: Object, required: true }
-  // { eyebrow, title, description, image?, imageAlt? }
-  // image — URL картинки для Hero. Если не задан, рендерится
-  // декоративная заглушка с тем же эффектом анимации.
+  // { eyebrow, title, description, image?, imageMobile?, imageAlt? }
+  // image       — URL картинки для Hero на десктопе.
+  // imageMobile — URL картинки для Hero на мобильных (≤768px, вертикальный кадр).
+  //               Если не задан — используется то же image что и на десктопе.
+  // Если image не задан вовсе, рендерится декоративная заглушка.
 })
 
 const heroEl = ref(null)
@@ -104,15 +106,23 @@ onBeforeUnmount(() => {
       class="page-hero-media"
       :class="{ 'is-placeholder': !data.image }"
     >
-      <img
-        v-if="data.image"
-        :src="data.image"
-        :alt="data.imageAlt || ''"
-        class="page-hero-img"
-        loading="eager"
-        decoding="async"
-        fetchpriority="high"
-      />
+      <picture v-if="data.image">
+        <!-- Мобильный кадр (вертикальный, 9:16 или 3:4) для экранов ≤768px -->
+        <source
+          v-if="data.imageMobile"
+          :srcset="data.imageMobile"
+          media="(max-width: 768px)"
+        />
+        <!-- Десктопный кадр (горизонтальный, 16:9) для всего остального -->
+        <img
+          :src="data.image"
+          :alt="data.imageAlt || ''"
+          class="page-hero-img"
+          loading="eager"
+          decoding="async"
+          fetchpriority="high"
+        />
+      </picture>
     </div>
 
     <!-- Затемняющий градиент для читабельности текста поверх картинки -->

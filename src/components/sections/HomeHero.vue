@@ -39,7 +39,18 @@ async function handleAction(href) {
 
 <template>
   <section class="hero">
+    <!-- Базовый тёмный фон -->
     <div class="hero-bg"></div>
+
+    <!-- Мобильная картинка Hero — показывается только на ≤768px через CSS.
+         Если data.imageMobile не задан, элемент не рендерится. -->
+    <div
+      v-if="data.imageMobile"
+      class="hero-media-mobile"
+      :style="{ backgroundImage: `url(${data.imageMobile})` }"
+      aria-hidden="true"
+    ></div>
+
     <div class="hero-pattern"></div>
     <div class="hero-content">
       <div class="hero-eyebrow">{{ data.eyebrow }}</div>

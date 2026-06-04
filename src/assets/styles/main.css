@@ -177,6 +177,30 @@ p { font-size: 16px; line-height: 1.7; color: var(--mid); font-weight: 400; }
                     repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(255,255,255,0.6) 39px, rgba(255,255,255,0.6) 40px);
 }
 
+/* Мобильная картинка Hero для главной страницы.
+ * Видна только на ≤768px (управляется media-запросом ниже).
+ * На десктопе display:none — не тратит ресурсы GPU. */
+.hero-media-mobile {
+  display: none; /* скрыта по умолчанию (десктоп) */
+  position: absolute; inset: 0;
+  z-index: 1;
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  opacity: 0;
+  animation: pageHeroReveal 2200ms cubic-bezier(0.22, 0.61, 0.36, 1) 60ms forwards;
+  will-change: opacity;
+}
+
+/* Затемняющий скрим поверх мобильной картинки главной страницы */
+.hero-media-mobile::after {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(180deg, rgba(10,10,9,0.45) 0%, rgba(10,10,9,0.15) 40%, rgba(10,10,9,0.80) 100%),
+    linear-gradient(90deg, rgba(10,10,9,0.40) 0%, rgba(10,10,9,0) 60%);
+}
+
 .hero-content {
   position: relative; z-index: 2;
   max-width: var(--max); margin: 0 auto; padding: 0 40px;
@@ -1633,6 +1657,20 @@ hr.app-hr { border: none; border-top: 1px solid var(--border); }
     font-size: 13px;
   }
   .hero-content { padding-bottom: 36px; }
+
+  /* Мобильная картинка для главной страницы — показываем */
+  .hero-media-mobile {
+    display: block;
+  }
+  /* Сетчатый паттерн скрываем: он слабо виден поверх фото */
+  .hero:has(.hero-media-mobile) .hero-pattern {
+    display: none;
+  }
+  /* Затемняем базовый фон — картинка поверх него,
+     но если картинка не загрузилась, фон остаётся */
+  .hero:has(.hero-media-mobile) .hero-bg {
+    opacity: 0.5;
+  }
 
   /* Hero direction cards — компактные строки */
   .hero-dirs { margin: 0 -16px; padding: 0 16px; }

@@ -6,6 +6,7 @@ export const pageHero = {
   title: 'Сыпучие\nстроительные\nматериалы',
   description: 'Собственная добыча на трёх карьерах. Доставка по всему региону собственным транспортом.',
   image: new URL('@/assets/hero/materials-hero.jpg', import.meta.url).href,
+  imageMobile: new URL('@/assets/hero/materials-hero-mobile.jpg', import.meta.url).href,
   imageAlt: 'Сыпучие строительные материалы'
 }
 

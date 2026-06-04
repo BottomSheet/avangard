@@ -10,7 +10,10 @@ export const hero = {
   actions: [
     { label: 'Оставить заявку', href: '#contact' },
     { label: 'О компании', href: '#about' }
-  ]
+  ],
+  // Мобильная версия фона Hero (вертикальный кадр для ≤768px).
+  // Закомментируйте строку ниже, если хотите использовать тот же фон что и на десктопе.
+  imageMobile: new URL('@/assets/hero/home-hero-mobile.jpg', import.meta.url).href
 }
 
 export const heroDirections = [
