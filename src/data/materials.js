@@ -182,13 +182,6 @@ export const delivery = {
 export const gallery = {
   label: 'Наши карьеры',
   title: 'Собственная добыча\nв трёх точках региона',
-  items: [
-    { label: 'фото / панорама карьера №1', large: true },
-    { label: 'фото / добыча песка' },
-    { label: 'фото / погрузка' },
-    { label: 'фото / карьер №2' },
-    { label: 'фото / карьер №3' }
-  ],
   center: [56.129057, 40.406635],
   zoom: 11,
   points: [

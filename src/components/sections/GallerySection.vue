@@ -14,17 +14,6 @@ defineProps({
       <SectionLabel :text="data.label" />
       <MultilineHeading :text="data.title" style="margin-bottom: 48px;" />
 
-      <div class="gallery-grid">
-        <div
-          v-for="(item, idx) in data.items"
-          :key="idx"
-          class="gallery-item"
-          :class="{ 'gallery-item-large': item.large }"
-        >
-          <div class="gallery-label">{{ item.label }}</div>
-        </div>
-      </div>
-
       <div v-if="data.points && data.points.length" class="gallery-map-block">
         <h3 class="gallery-map-title">Объекты на карте</h3>
         <p class="gallery-map-desc">
